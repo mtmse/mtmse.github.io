@@ -50,3 +50,13 @@ body {
 .card p {
     font-size: 12pt;
 }
+
+@media only screen and (max-width: 1024px) {
+    body {
+        background-color: #eee;
+    }
+
+    #content {
+        width: auto;
+    }
+}
