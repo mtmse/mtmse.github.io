@@ -1,7 +1,15 @@
 default namespace ns1 = "http://www.daisy.org/ns/2011/obfl"
 
 blockContents =
-  text | leader | marker | br | evaluate | page-number | span | style
+  text
+  | leader
+  | marker
+  | br
+  | evaluate
+  | page-number
+  | marker-reference
+  | span
+  | style
 \namespace = empty
 row-spacing = attribute row-spacing { text }?
 # hyphenate, true to hyphenate, false otherwise
@@ -76,6 +84,8 @@ padding-atts =
 block-atts-except-list-type-row-spacing-id =
   attribute first-line-indent { text }?,
   attribute text-indent { text }?,
+  attribute right-last-line-indent { text }?,
+  attribute right-text-indent { text }?,
   attribute block-indent { text }?,
   attribute align { "left" | "center" | "right" }?,
   attribute underline-style { border-style-enum }?,
@@ -211,24 +221,22 @@ attlist-marker-indicator =
 field =
   element field {
     attlist-field,
-    (marker-reference | \string | current-page | evaluate-in-field)*
+    (marker-reference-in-field
+     | \string
+     | current-page
+     | evaluate-in-field)*
   }
 attlist-field &=
   attribute text-style { xsd:NMTOKEN }?,
   attribute allow-text-flow { "true" | "false" }?
 current-page = element current-page { attlist-current-page, empty }
 attlist-current-page &=
-  attribute number-format {
-    "default"
-    | "roman"
-    | "upper-roman"
-    | "lower-roman"
-    | "upper-alpha"
-    | "lower-alpha"
-  }?,
+  number-format-attribute?,
   attribute text-style { xsd:NMTOKEN }?
 marker-reference =
   element marker-reference { attlist-marker-reference, empty }
+marker-reference-in-field =
+  element marker-reference { attlist-marker-reference-in-field, empty }
 attlist-marker-reference &=
   attribute marker { xsd:NMTOKEN },
   attribute direction {
@@ -249,7 +257,9 @@ attlist-marker-reference &=
   },
   
   ## Offsets the start of the search by the specified number of pages
-  attribute start-offset { xsd:short }?,
+  attribute start-offset { xsd:short }?
+attlist-marker-reference-in-field &=
+  attlist-marker-reference,
   attribute text-style { xsd:NMTOKEN }?
 \string = element string { attlist-string, empty }
 attlist-string &=
@@ -259,20 +269,32 @@ evaluate-in-field =
   element evaluate { attlist-evaluate-in-field, empty }
 attlist-evaluate-in-field &=
   attribute expression { text },
-  attribute text-style { xsd:NMTOKEN }?
-evaluate =
-  element evaluate {
-    attribute expression { text },
-    empty
-  }
+  attribute text-style { xsd:NMTOKEN }?,
+  number-format-attribute?
+evaluate = element evaluate { attlist-evaluate, empty }
+attlist-evaluate &=
+  attribute expression { text },
+  number-format-attribute?
 table-of-contents =
-  element table-of-contents { attlist-table-of-contents, toc-entry+ }
+  element table-of-contents { attlist-table-of-contents, toc-block+ }
 attlist-table-of-contents &= name-id
-toc-entry =
-  element toc-entry { attlist-toc-entry, (blockContents | toc-entry)* }
-attlist-toc-entry &=
-  attribute ref-id { xsd:IDREF },
-  blockAtts
+toc-block =
+  element toc-block {
+    attlist-toc-block, (toc-entry | toc-entry-on-resumed | toc-block)*
+  }
+attlist-toc-block &= blockAtts
+toc-entry = element toc-entry { attlist-toc-entry, blockContents* }
+attlist-toc-entry &= attribute ref-id { xsd:IDREF }
+toc-entry-on-resumed =
+  element toc-entry-on-resumed {
+    attlist-toc-entry-on-resumed, blockContents*
+  }
+attlist-toc-entry-on-resumed &=
+  attribute range {
+    xsd:string {
+      pattern = "\[[^,\[\]\)]+,([^,\[\]\)]+\]|[^,\[\]\)]*\))"
+    }
+  }
 volume-template =
   element volume-template {
     attlist-volume-template, pre-content?, post-content?
@@ -429,14 +451,14 @@ attlist-marker &=
   attribute value { text }
 # A leader, move to a specific location within the current row
 leader = element leader { attlist-leader, empty }
-# align, 	alignment of the text following the leader.
-#		    The leader can be aligned to the left, center or
-#		    right of the following text segment. Left is
-#		    default.
-# pattern, 	fill pattern to use up to the leader position, " "
-#		    is default.
+# align,    alignment of the text following the leader.
+#           The leader can be aligned to the left, center or
+#           right of the following text segment. Left is
+#           default.
+# pattern,  fill pattern to use up to the leader position, " "
+#           is default.
 # position, position of the leader within the row. Can be
-#		    relative (percent) or absolute (column).
+#           relative (percent) or absolute (column).
 attlist-leader &=
   attribute align { "left" | "center" | "right" }?,
   attribute pattern { text }?,
@@ -450,6 +472,8 @@ attlist-br &= empty
 page-number = element page-number { attlist-page-number, empty }
 attlist-page-number &=
   attribute ref-id { xsd:IDREF },
+  number-format-attribute?
+number-format-attribute =
   attribute number-format {
     "default"
     | "roman"
@@ -457,7 +481,7 @@ attlist-page-number &=
     | "lower-roman"
     | "upper-alpha"
     | "lower-alpha"
-  }?
+  }
 # Tabular data
 table =
   element table {
@@ -540,6 +564,7 @@ any_obfl =
                    | item
                    | before
                    | block
+                   | toc-block
                    | td
                    | after) {
     attribute name { xsd:NMTOKEN }?,
@@ -565,6 +590,7 @@ any_obfl =
             | item
             | before
             | block
+            | toc-block
             | td
             | after {
       attribute id { xsd:ID }?,

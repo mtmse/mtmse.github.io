@@ -8,6 +8,7 @@
       <ref name="br"/>
       <ref name="evaluate"/>
       <ref name="page-number"/>
+      <ref name="marker-reference"/>
       <ref name="span"/>
       <ref name="style"/>
     </choice>
@@ -38,14 +39,14 @@
     </optional>
     <optional>
       <attribute name="translate">
-		<choice>
-	        <value></value>
-	        <value>pre-translated</value>
+        <choice>
+          <value></value>
+          <value>pre-translated</value>
           <value>grade0</value>
-	        <value>grade1</value>
-	        <value>grade2</value>
-	        <value>grade3</value>
-	    </choice>
+          <value>grade1</value>
+          <value>grade2</value>
+          <value>grade3</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -234,6 +235,12 @@
       <attribute name="text-indent"/>
     </optional>
     <optional>
+      <attribute name="right-last-line-indent"/>
+    </optional>
+    <optional>
+      <attribute name="right-text-indent"/>
+    </optional>
+    <optional>
       <attribute name="block-indent"/>
     </optional>
     <optional>
@@ -283,16 +290,16 @@
         </choice>
       </attribute>
     </optional>
-  	<optional>
-  		<attribute name="list-style">
-  			<data type="string"/>
-  		</attribute>
-  	</optional>
-  	<optional>
-  		<attribute name="list-item-label">
-  			<data type="string"/>
-  		</attribute>
-  	</optional>
+    <optional>
+      <attribute name="list-style">
+        <data type="string"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="list-item-label">
+        <data type="string"/>
+      </attribute>
+    </optional>
   </define>
   <define name="block-atts">
     <ref name="list-atts"/>
@@ -461,7 +468,7 @@
         <ref name="layout-master"/>
       </oneOrMore>
       <zeroOrMore>
-      	<ref name="file-reference"/>
+        <ref name="file-reference"/>
       </zeroOrMore>
       <zeroOrMore>
         <ref name="xml-processor"/>
@@ -507,14 +514,14 @@
     </optional>
     <optional>
       <attribute name="translate">
-      	<choice>
-	        <value></value>
-	        <value>pre-translated</value>
-      	  <value>grade0</value>
-	        <value>grade1</value>
-	        <value>grade2</value>
-	        <value>grade3</value>
-	    </choice>
+        <choice>
+          <value></value>
+          <value>pre-translated</value>
+          <value>grade0</value>
+          <value>grade1</value>
+          <value>grade2</value>
+          <value>grade3</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -665,7 +672,7 @@
       <ref name="attlist-field"/>
       <zeroOrMore>
         <choice>
-          <ref name="marker-reference"/>
+          <ref name="marker-reference-in-field"/>
           <ref name="string"/>
           <ref name="current-page"/>
           <ref name="evaluate-in-field"/>
@@ -695,18 +702,9 @@
     </element>
   </define>
   <define name="attlist-current-page" combine="interleave">
-     <optional>
-      <attribute name="number-format">
-        <choice>
-          <value>default</value>
-          <value>roman</value>
-          <value>upper-roman</value>
-          <value>lower-roman</value>
-          <value>upper-alpha</value>
-          <value>lower-alpha</value>
-        </choice>
-      </attribute>
-     </optional>
+    <optional>
+      <ref name="number-format-attribute"/>  
+    </optional>
     <optional>
       <attribute name="text-style">
         <data type="NMTOKEN"/>
@@ -716,6 +714,12 @@
   <define name="marker-reference">
     <element name="marker-reference">
       <ref name="attlist-marker-reference"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="marker-reference-in-field">
+    <element name="marker-reference">
+      <ref name="attlist-marker-reference-in-field"/>
       <empty/>
     </element>
   </define>
@@ -748,6 +752,9 @@
          <data type="short"/>
       </attribute>
     </optional>
+  </define>
+  <define name="attlist-marker-reference-in-field" combine="interleave">
+    <ref name="attlist-marker-reference"/>
     <optional>
       <attribute name="text-style">
         <data type="NMTOKEN"/>
@@ -781,32 +788,53 @@
         <data type="NMTOKEN"/>
       </attribute>
     </optional>
+    <optional>
+      <ref name="number-format-attribute"/>
+    </optional>
   </define>
   <define name="evaluate">
     <element name="evaluate">
-      <attribute name="expression"/>
+      <ref name="attlist-evaluate"/>
       <empty/>
     </element>
+  </define>
+  <define name="attlist-evaluate" combine="interleave">
+    <attribute name="expression"/>
+    <optional>
+      <ref name="number-format-attribute"/>
+    </optional>
   </define>
   <define name="table-of-contents">
     <element name="table-of-contents">
       <ref name="attlist-table-of-contents"/>
       <oneOrMore>
-        <ref name="toc-entry"/>
+        <ref name="toc-block"/>
       </oneOrMore>
     </element>
   </define>
   <define name="attlist-table-of-contents" combine="interleave">
     <ref name="name-id"/>
   </define>
+  <define name="toc-block">
+    <element name="toc-block">
+      <ref name="attlist-toc-block"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="toc-entry"/>
+          <ref name="toc-entry-on-resumed"/>
+          <ref name="toc-block"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="attlist-toc-block" combine="interleave">
+    <ref name="blockAtts"/>
+  </define>
   <define name="toc-entry">
     <element name="toc-entry">
       <ref name="attlist-toc-entry"/>
       <zeroOrMore>
-        <choice>
-          <ref name="blockContents"/>
-          <ref name="toc-entry"/>
-        </choice>
+        <ref name="blockContents"/>
       </zeroOrMore>
     </element>
   </define>
@@ -814,7 +842,21 @@
     <attribute name="ref-id">
       <data type="IDREF"/>
     </attribute>
-    <ref name="blockAtts"/>
+  </define>
+  <define name="toc-entry-on-resumed">
+    <element name="toc-entry-on-resumed">
+      <ref name="attlist-toc-entry-on-resumed"/>
+      <zeroOrMore>
+        <ref name="blockContents"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="attlist-toc-entry-on-resumed" combine="interleave">
+    <attribute name="range">
+        <data type="string">
+            <param name="pattern">\[[^,\[\]\)]+,([^,\[\]\)]+\]|[^,\[\]\)]*\))</param>
+        </data>
+    </attribute>
   </define>
   <define name="volume-template">
     <element name="volume-template">
@@ -1415,14 +1457,14 @@
     </element>
   </define>
   <!--
-    align, 	alignment of the text following the leader.
-    			The leader can be aligned to the left, center or
-    			right of the following text segment. Left is
-    			default.
-    pattern, 	fill pattern to use up to the leader position, " "
-    			is default.
+    align,    alignment of the text following the leader.
+              The leader can be aligned to the left, center or
+              right of the following text segment. Left is
+              default.
+    pattern,  fill pattern to use up to the leader position, " "
+              is default.
     position, position of the leader within the row. Can be
-    			relative (percent) or absolute (column).
+              relative (percent) or absolute (column).
   -->
   <define name="attlist-leader" combine="interleave">
     <optional>
@@ -1472,17 +1514,20 @@
       <data type="IDREF"/>
     </attribute>
     <optional>
-      <attribute name="number-format">
-        <choice>
-          <value>default</value>
-          <value>roman</value>
-          <value>upper-roman</value>
-          <value>lower-roman</value>
-          <value>upper-alpha</value>
-          <value>lower-alpha</value>
-        </choice>
-      </attribute>
+      <ref name="number-format-attribute"/>
     </optional>
+  </define>
+  <define name="number-format-attribute">
+    <attribute name="number-format">
+      <choice>
+        <value>default</value>
+        <value>roman</value>
+        <value>upper-roman</value>
+        <value>lower-roman</value>
+        <value>upper-alpha</value>
+        <value>lower-alpha</value>
+      </choice>
+    </attribute>
   </define>
   <!-- Tabular data -->
   <define name="table">
@@ -1567,10 +1612,10 @@
   <define name="xml-data">
     <element name="xml-data">
       <ref name="attlist-xml-data"/>
-    	<choice>
-    		<ref name="any_element"/>
-    		<ref name="any_obfl"/>
-    	</choice>
+      <choice>
+        <ref name="any_element"/>
+        <ref name="any_obfl"/>
+      </choice>
     </element>
   </define>
   <define name="attlist-xml-data" combine="interleave">
@@ -1597,7 +1642,7 @@
     <element name="rendering-scenario">
       <ref name="attlist-rendering-scenario"/>
       <zeroOrMore>
-      	<ref name="parameter"/>
+        <ref name="parameter"/>
       </zeroOrMore>
     </element>
   </define>
@@ -1615,30 +1660,30 @@
     </optional>
   </define>
   <define name="parameter">
-  	<element name="parameter">
-  		<ref name="attlist-parameter"/>
-  	</element>
+    <element name="parameter">
+      <ref name="attlist-parameter"/>
+    </element>
   </define>
   <define name="attlist-parameter">
-  	<attribute name="name">
-  		<data type="string"/>
-  	</attribute>
-  	<attribute name="value">
-  		<data type="string"/>
-  	</attribute>
+    <attribute name="name">
+      <data type="string"/>
+    </attribute>
+    <attribute name="value">
+      <data type="string"/>
+    </attribute>
   </define>
   <define name="file-reference">
-  	<element name="file-reference">
-  		<ref name="attlist-file-reference"/>
-  		<choice>
-  			<ref name="any_content"/>
-  		</choice>
-  	</element>
+    <element name="file-reference">
+      <ref name="attlist-file-reference"/>
+      <choice>
+        <ref name="any_content"/>
+      </choice>
+    </element>
   </define>
   <define name="attlist-file-reference">
-		<attribute name="uri">
-			<data type="string"/>
-		</attribute>
+    <attribute name="uri">
+      <data type="string"/>
+    </attribute>
   </define>
   <define name="xml-processor">
     <element name="xml-processor">
@@ -1719,6 +1764,7 @@
           <name>item</name>
           <name>before</name>
           <name>block</name>
+          <name>toc-block</name>
           <name>td</name>
           <name>after</name>
         </except>
@@ -1754,6 +1800,7 @@
           <name>item</name>
           <name>before</name>
           <name>block</name>
+          <name>toc-block</name>
           <name>td</name>
           <name>after</name>
       </choice>

@@ -9,6 +9,7 @@
         <xs:element ref="obfl:br"/>
         <xs:group ref="obfl:evaluate"/>
         <xs:group ref="obfl:page-number"/>
+        <xs:group ref="obfl:marker-reference"/>
         <xs:element ref="obfl:span"/>
         <xs:element ref="obfl:style"/>
       </xs:choice>
@@ -146,6 +147,8 @@
   <xs:attributeGroup name="block-atts-except-list-type-row-spacing-id">
     <xs:attribute name="first-line-indent"/>
     <xs:attribute name="text-indent"/>
+    <xs:attribute name="right-last-line-indent"/>
+    <xs:attribute name="right-text-indent"/>
     <xs:attribute name="block-indent"/>
     <xs:attribute name="align">
       <xs:simpleType>
@@ -499,7 +502,7 @@
   <xs:element name="field">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="obfl:marker-reference"/>
+        <xs:group ref="obfl:marker-reference-in-field"/>
         <xs:element ref="obfl:string"/>
         <xs:element ref="obfl:current-page"/>
         <xs:group ref="obfl:evaluate-in-field"/>
@@ -538,11 +541,24 @@
     </xs:attribute>
     <xs:attribute name="text-style" type="xs:NMTOKEN"/>
   </xs:attributeGroup>
-  <xs:element name="marker-reference">
-    <xs:complexType>
-      <xs:attributeGroup ref="obfl:attlist-marker-reference"/>
-    </xs:complexType>
-  </xs:element>
+  <xs:group name="marker-reference">
+    <xs:sequence>
+      <xs:element name="marker-reference">
+        <xs:complexType>
+          <xs:attributeGroup ref="obfl:attlist-marker-reference"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="marker-reference-in-field">
+    <xs:sequence>
+      <xs:element name="marker-reference">
+        <xs:complexType>
+          <xs:attributeGroup ref="obfl:attlist-marker-reference-in-field"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
   <xs:attributeGroup name="attlist-marker-reference">
     <xs:attribute name="marker" use="required" type="xs:NMTOKEN"/>
     <xs:attribute name="direction" use="required">
@@ -574,6 +590,9 @@
         <xs:documentation>Offsets the start of the search by the specified number of pages</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="attlist-marker-reference-in-field">
+    <xs:attributeGroup ref="obfl:attlist-marker-reference"/>
     <xs:attribute name="text-style" type="xs:NMTOKEN"/>
   </xs:attributeGroup>
   <xs:element name="string">
@@ -597,21 +616,48 @@
   <xs:attributeGroup name="attlist-evaluate-in-field">
     <xs:attribute name="expression" use="required"/>
     <xs:attribute name="text-style" type="xs:NMTOKEN"/>
+    <xs:attribute name="number-format">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="default"/>
+          <xs:enumeration value="roman"/>
+          <xs:enumeration value="upper-roman"/>
+          <xs:enumeration value="lower-roman"/>
+          <xs:enumeration value="upper-alpha"/>
+          <xs:enumeration value="lower-alpha"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:group name="evaluate">
     <xs:sequence>
       <xs:element name="evaluate">
         <xs:complexType>
-          <xs:attribute name="expression" use="required"/>
+          <xs:attributeGroup ref="obfl:attlist-evaluate"/>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:group>
+  <xs:attributeGroup name="attlist-evaluate">
+    <xs:attribute name="expression" use="required"/>
+    <xs:attribute name="number-format">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="default"/>
+          <xs:enumeration value="roman"/>
+          <xs:enumeration value="upper-roman"/>
+          <xs:enumeration value="lower-roman"/>
+          <xs:enumeration value="upper-alpha"/>
+          <xs:enumeration value="lower-alpha"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:group name="table-of-contents">
     <xs:sequence>
       <xs:element name="table-of-contents">
         <xs:complexType>
-          <xs:group maxOccurs="unbounded" ref="obfl:toc-entry"/>
+          <xs:group maxOccurs="unbounded" ref="obfl:toc-block"/>
           <xs:attributeGroup ref="obfl:attlist-table-of-contents"/>
         </xs:complexType>
       </xs:element>
@@ -620,14 +666,28 @@
   <xs:attributeGroup name="attlist-table-of-contents">
     <xs:attributeGroup ref="obfl:name-id"/>
   </xs:attributeGroup>
+  <xs:group name="toc-block">
+    <xs:sequence>
+      <xs:element name="toc-block">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="obfl:toc-entry"/>
+            <xs:element ref="obfl:toc-entry-on-resumed"/>
+            <xs:group ref="obfl:toc-block"/>
+          </xs:choice>
+          <xs:attributeGroup ref="obfl:attlist-toc-block"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="attlist-toc-block">
+    <xs:attributeGroup ref="obfl:blockAtts"/>
+  </xs:attributeGroup>
   <xs:group name="toc-entry">
     <xs:sequence>
       <xs:element name="toc-entry">
         <xs:complexType mixed="true">
-          <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:group ref="obfl:blockContents"/>
-            <xs:group ref="obfl:toc-entry"/>
-          </xs:choice>
+          <xs:group minOccurs="0" maxOccurs="unbounded" ref="obfl:blockContents"/>
           <xs:attributeGroup ref="obfl:attlist-toc-entry"/>
         </xs:complexType>
       </xs:element>
@@ -635,7 +695,21 @@
   </xs:group>
   <xs:attributeGroup name="attlist-toc-entry">
     <xs:attribute name="ref-id" use="required" type="xs:IDREF"/>
-    <xs:attributeGroup ref="obfl:blockAtts"/>
+  </xs:attributeGroup>
+  <xs:element name="toc-entry-on-resumed">
+    <xs:complexType mixed="true">
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="obfl:blockContents"/>
+      <xs:attributeGroup ref="obfl:attlist-toc-entry-on-resumed"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="attlist-toc-entry-on-resumed">
+    <xs:attribute name="range" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="\[[^,\[\]\)]+,([^,\[\]\)]+\]|[^,\[\]\)]*\))"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:element name="volume-template">
     <xs:complexType>
@@ -1149,14 +1223,14 @@
     </xs:complexType>
   </xs:element>
   <!--
-    align, 	alignment of the text following the leader.
-    		    The leader can be aligned to the left, center or
-    		    right of the following text segment. Left is
-    		    default.
-    pattern, 	fill pattern to use up to the leader position, " "
-    		    is default.
+    align,    alignment of the text following the leader.
+              The leader can be aligned to the left, center or
+              right of the following text segment. Left is
+              default.
+    pattern,  fill pattern to use up to the leader position, " "
+              is default.
     position, position of the leader within the row. Can be
-    		    relative (percent) or absolute (column).
+              relative (percent) or absolute (column).
   -->
   <xs:attributeGroup name="attlist-leader">
     <xs:attribute name="align">
@@ -1200,6 +1274,20 @@
   <xs:attributeGroup name="attlist-page-number">
     <xs:attribute name="ref-id" use="required" type="xs:IDREF"/>
     <xs:attribute name="number-format">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="default"/>
+          <xs:enumeration value="roman"/>
+          <xs:enumeration value="upper-roman"/>
+          <xs:enumeration value="lower-roman"/>
+          <xs:enumeration value="upper-alpha"/>
+          <xs:enumeration value="lower-alpha"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="number-format-attribute">
+    <xs:attribute name="number-format" use="required">
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="default"/>
@@ -1673,6 +1761,22 @@
           </xs:complexType>
         </xs:element>
         <xs:element name="block">
+          <xs:complexType mixed="true">
+            <xs:group minOccurs="0" maxOccurs="unbounded" ref="obfl:any_content"/>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="collection" type="xs:IDREF"/>
+            <xs:attribute name="ref-id" type="xs:IDREF"/>
+            <xs:attribute name="renderer" type="xs:IDREF"/>
+            <xs:attribute name="name" type="xs:ID"/>
+            <xs:attribute name="master" type="xs:IDREF"/>
+            <xs:attribute name="item" type="xs:IDREF"/>
+            <xs:attribute name="to" type="xs:ID"/>
+            <xs:attribute name="toc" type="xs:IDREF"/>
+            <xs:attribute name="processor" type="xs:IDREF"/>
+            <xs:anyAttribute processContents="skip"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="toc-block">
           <xs:complexType mixed="true">
             <xs:group minOccurs="0" maxOccurs="unbounded" ref="obfl:any_content"/>
             <xs:attribute name="id" type="xs:ID"/>
