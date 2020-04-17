@@ -57,6 +57,8 @@ body {
     }
 
     #content {
+        margin: 0;
         width: auto;
+        border-radius: 0px;
     }
 }
