@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>split-table.xsl</title>
+</head>
+<body>
+<h1>Description for split-table.xsl</h1>
+<pre>
+	Supports splitting tables with the tag names table, tr, th and td 
+	and the attributes colspan and rowspan. The assumption is that
+	the table follows html table sematics for these elements.
+	
+	The main entry points are:
+	
+	&lt;xsl:template match="*:table" mode="splitTable"&gt;
+	&lt;xsl:template match="*:table" mode="makeGrid"&gt;
+
+	The names of the attributes (colspan and rowspan) can be configured via
+	the parameters rowspanName and colspanName.
+	
+	Tables in the html, dtbook and obfl namespaces have been tested.
+</pre>
+</body>
+</html>

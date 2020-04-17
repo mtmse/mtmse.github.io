@@ -1,0 +1,52 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 120vh;
+    width: 100vw;
+    background: rgb(121,121,121);
+    background: linear-gradient(130deg, rgba(96,96,96,1) 0%, rgba(121,121,121,1) 50%, rgba(255,255,255 ,1) 100%);
+    overflow-x: hidden;
+}
+
+#content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px auto 0 auto;
+    padding: 30px 10px;
+    width: 1000px;
+    background-color: #eee;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#logo {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.fullwidth {
+    margin: 40px 0px;
+    width: 100%;
+}
+
+.card {
+    background-color: white;
+    padding: 10px;
+    margin: 10px 20px 0 20px;
+    width: 250px;
+    border-radius: 5px;
+    font-family: "Variable-Black",Helvetica,Arial,sans-serif;
+}
+
+.card h2 {
+    font-size: 16pt;
+}
+
+.card p {
+    font-size: 12pt;
+}

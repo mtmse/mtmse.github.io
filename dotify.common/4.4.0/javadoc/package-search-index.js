@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.daisy.dotify.common.braille"},{"l":"org.daisy.dotify.common.collection"},{"l":"org.daisy.dotify.common.io"},{"l":"org.daisy.dotify.common.java"},{"l":"org.daisy.dotify.common.splitter"},{"l":"org.daisy.dotify.common.text"},{"l":"org.daisy.dotify.common.xml"}]

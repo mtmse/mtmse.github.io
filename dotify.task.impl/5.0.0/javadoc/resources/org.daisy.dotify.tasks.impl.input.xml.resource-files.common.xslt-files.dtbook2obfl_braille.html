@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>dtbook2obfl_braille.xsl</title>
+</head>
+<body>
+<h1>Description for dtbook2obfl_braille.xsl</h1>
+<pre xml:space="preserve">
+	DTBook to OBFL for braille (sv_SE)
+
+	Description
+	DTBook to Flow stylesheet for Swedish braille.
+
+	Parameters
+		page-width (inherited)
+		page-height (inherited)
+		inner-margin (inherited)
+		outer-margin (inherited)
+		row-spacing (inherited)
+		duplex (inherited)
+
+	Format (input -&gt; output)
+		DTBook -&gt; OBFL
+
+	Author: Joel Håkansson
+</pre>
+<h2>Summary</h2>
+		<table>
+			<tr>
+				<th rowspan="1" colspan="1">Element</th>
+				<th rowspan="1" colspan="1">Category</th>
+				<th rowspan="1" colspan="1">Category description</th>
+				<th rowspan="1" colspan="1">Action summary</th>
+				<th rowspan="1" colspan="1">Default action</th>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">bodymatter</td>
+				<td rowspan="1" colspan="1">Sequence</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New sequence, restart pagination</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">frontmatter</td>
+				<td rowspan="1" colspan="1">Sequence</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New sequence, restart pagination</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">rearmatter</td>
+				<td rowspan="1" colspan="1">Sequence</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New sequence, continue pagination</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">level</td>
+				<td rowspan="1" colspan="1">Block (type 1)</td>
+				<td rowspan="1" colspan="1">no text</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">level1</td>
+				<td rowspan="1" colspan="1">Block (type 1)</td>
+				<td rowspan="1" colspan="1">no text</td>
+				<td rowspan="1" colspan="1">New block, break page before, margin top = 3 unless h1</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">level2</td>
+				<td rowspan="1" colspan="1">Block (type 1)</td>
+				<td rowspan="1" colspan="1">no text</td>
+				<td rowspan="1" colspan="1">New block, margin top = 2 unless h2</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">level3</td>
+				<td rowspan="1" colspan="1">Block (type 1)</td>
+				<td rowspan="1" colspan="1">no text</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1 unless h3</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">level4</td>
+				<td rowspan="1" colspan="1">Block (type 1)</td>
+				<td rowspan="1" colspan="1">no text</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1 unless h4</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">level5</td>
+				<td rowspan="1" colspan="1">Block (type 1)</td>
+				<td rowspan="1" colspan="1">no text</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1 unless h5</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">level6</td>
+				<td rowspan="1" colspan="1">Block (type 1)</td>
+				<td rowspan="1" colspan="1">no text</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1 unless h6</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">list</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1">[complex]</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">blockquote</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1">New block, margin left = 2, margin top = 1, margin bottom = 1</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">linegroup</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1">New block, if preceeded by linegroup margin top = 1</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">poem</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1, margin bottom = 1</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">div</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1">New block, margin bottom = 1</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">annotation</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">dl</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">imggroup</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">note</td>
+				<td rowspan="1" colspan="1">Block (type 2)</td>
+				<td rowspan="1" colspan="1">text sibling</td>
+				<td rowspan="1" colspan="1">Create "collection"</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">bridgehead</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">caption</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">Surround block with delimiters</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">covertitle</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">docauthor</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">Ignore (generated on title page instead)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">doctitle</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">Ignore (generated on title page instead)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">li</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">Processing depends on type-attribute</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">h1</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">New block, margin top = 3 (margin bottom = 1 unless directly followed by level2)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">h2</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">New block, margin top = 2 (margin bottom = 1 unless directly followed by level3)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">h3</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1 (margin bottom = 1 unless directly followed by level4)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">h4</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1 (margin bottom = 1 unless directly followed by level5)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">h5</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1 (margin bottom = 1 unless directly followed by level6)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">h6</td>
+				<td rowspan="1" colspan="1">Block (type 3)</td>
+				<td rowspan="1" colspan="1">text child</td>
+				<td rowspan="1" colspan="1">New block, margin top = 1, margin bottom = 1</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">author</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">address</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">hd</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">line</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1">New block, text indent = 2</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">p</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1">New block, layout depends on class-attribute</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">sidebar</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">byline</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">dateline</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">epigraph</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">prodnote</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1">Surround block with delimiters</td>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">title</td>
+				<td rowspan="1" colspan="1">Block (type 4)</td>
+				<td rowspan="1" colspan="1">text sibling and/or text child</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">a</td>
+				<td rowspan="1" colspan="1">Inline/Block</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block, if block context</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">cite</td>
+				<td rowspan="1" colspan="1">Inline/Block</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block, if block context</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">kbd</td>
+				<td rowspan="1" colspan="1">Inline/Block</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block, if block context</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">samp</td>
+				<td rowspan="1" colspan="1">Inline/Block</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block, if block context</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">code</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">bdo</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">em</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Add braille markers for emphasis</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">strong</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Add braille markers for strong</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">span</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">sub</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Add braille markers for subscript</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">sup</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Add braille markers for superscript</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">abbr</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">acronym</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">dfn</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">q</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">noteref</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">annoref</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">sent</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">w</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">linenum</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">lic</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">If inline and in toc, align right, fill space with ...</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">dd</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block, text indent = 2, prefix with braille markers</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">dt</td>
+				<td rowspan="1" colspan="1">Inline</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New block</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">br</td>
+				<td rowspan="1" colspan="1">Special</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Break line</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">pagenum</td>
+				<td rowspan="1" colspan="1">Special</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Add pagenum marker</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">book</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">col</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">colgroup</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">dtbook</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">head</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">meta</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">link</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">img</td>
+				<td rowspan="1" colspan="1">No-op</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">Continue</td>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">table</td>
+				<td rowspan="1" colspan="1">Table</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">As matrix table</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">tbody</td>
+				<td rowspan="1" colspan="1">Table</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">As table body (with tfoot)</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">td</td>
+				<td rowspan="1" colspan="1">Table</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New table cell</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">tfoot</td>
+				<td rowspan="1" colspan="1">Table</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">As table body</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">th</td>
+				<td rowspan="1" colspan="1">Table</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New table cell</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">thead</td>
+				<td rowspan="1" colspan="1">Table</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">As table header</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+			<tr>
+				<td rowspan="1" colspan="1">tr</td>
+				<td rowspan="1" colspan="1">Table</td>
+				<td rowspan="1" colspan="1"/>
+				<td rowspan="1" colspan="1">New table row</td>
+				<td rowspan="1" colspan="1"/>
+			</tr>
+		</table>
+<h2>Table rendering</h2>
+<p>Tables can be rendered either as a normal table ("matrix") or as a stair case, depending on which is more effective
+in a particular case. Efficiency is calculated by evaluating:</p>
+<pre xml:space="preserve">
+ (100 * $forced-break-count) + 
+ $total-height + 
+ (($page-width - $min-block-width) / $page-width)
+ </pre>
+ <p>This expression says that forced breaks are very expensive (= inefficient). If they occur in one
+ solution, but not the other, the latter will be chosen.
+ If the number of forced breaks are equal, then
+ the solution with the smallest total height will win. Finally, if the total
+ height is equal for both solutions, the solution with biggest minimum block width
+ is selected.</p>
+ <h3>Additional requirements</h3>
+<ul>
+<li>Table column spacing should be at least 2.</li>
+<li>Matrix tables can have at most 5 columns before breaking table into parts.</li>
+<li>Stair case tables can have at most 8 columns before breaking table into parts.</li>
+</ul>
+
+<h3>Special case: Matrix table with a legend</h3>
+<p>When a table has th elements and more than two columns, a legend is used with the matrix table solution.
+The elements in the legend are listed in the order of the th elements in the table (ordered by row, then column), for example:</p>
+<pre xml:space="preserve">
+Legend
+n1 [value of th]
+n2 [value of th]
+...
+</pre>
+<p>In addition, hyphenations are not allowed in this solution. Consequently, the cost expression above is replaced by the following in these cases:</p>
+<pre xml:space="preserve">
+ (100 * $forced-break-count) +
+ (10 * $hyphenation-count) + 
+ $total-height + 
+ (($page-width - $min-block-width) / $page-width)
+ </pre>
+	</body>
+</html>

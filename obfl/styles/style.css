@@ -1,0 +1,99 @@
+div.sidebar {
+	/*border: 1px solid gray;*/
+	border-left: 0.5em solid #8ccbf2; 
+	background-color: #def; 
+	margin-top: 1em;
+	margin-bottom: 1.5em; 
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.automated {
+	color: green;
+	text-decoration: none;
+	border-bottom: 1px dotted;
+}
+.dashed-box {
+	border-style: dashed;
+	border-width: 1px;
+	border-color: #aaa;
+	padding: 0.25em;
+}
+.solid-box {
+	border-style: solid;
+	border-width: 6px;
+}
+table.box-model {
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+	border-style: none;
+	border-width: 0px;
+	text-align: center;
+}
+.box-model tr td {
+	border-style: none;
+	padding: 0.5em;
+}
+.issue, .note, .example {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+div.issue, div.note, div.example {
+    padding: 1em 1.2em 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+.issue {
+    border-color: #e05252;
+    background: #fbe9e9;
+}
+.note {
+    border-color: #52e052;
+    background: #e9fbe9;
+}
+.example {
+  border-color: #e0cb52;
+  background-color: #fcfaee;
+}
+table.page-model {
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+	border-style: none;
+	border-width: 0px;
+	text-align: center;
+}
+.page-model tr td {
+	border-style: solid;
+	border-width: 2px;
+	padding: 0.5em;
+	vertical-align: bottom;
+}
+
+.rotate {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+
+  white-space: nowrap;
+  width: 20px;
+}
+
+td.intersection {
+	background-color: pink;
+}
