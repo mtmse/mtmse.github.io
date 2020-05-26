@@ -1,3 +1,4 @@
+namespace local = ""
 default namespace ns1 = "http://www.daisy.org/ns/2011/obfl"
 
 blockContents =
@@ -7,6 +8,7 @@ blockContents =
   | br
   | evaluate
   | page-number
+  | external-reference
   | marker-reference
   | span
   | style
@@ -25,9 +27,9 @@ name-id = attribute name { xsd:ID }
 # dashed, a dashed line
 
 # Due to the limitations in expressiveness of text-only media, the meaning of the numbers are
-# open to interpretation. 1 should be the thinnest possible value, 2 should be the double width 
-# of 1, and so on. However, if it better matches the capabilities of the border characters, 2 
-# could also mean the second thinnest possible border, and 3 the third thinnest border, and so on. 
+# open to interpretation. 1 should be the thinnest possible value, 2 should be the double width
+# of 1, and so on. However, if it better matches the capabilities of the border characters, 2
+# could also mean the second thinnest possible border, and 3 the third thinnest border, and so on.
 # The default value is 1.
 
 # border-style, border style
@@ -269,12 +271,9 @@ evaluate-in-field =
   element evaluate { attlist-evaluate-in-field, empty }
 attlist-evaluate-in-field &=
   attribute expression { text },
-  attribute text-style { xsd:NMTOKEN }?,
-  number-format-attribute?
+  attribute text-style { xsd:NMTOKEN }?
 evaluate = element evaluate { attlist-evaluate, empty }
-attlist-evaluate &=
-  attribute expression { text },
-  number-format-attribute?
+attlist-evaluate &= attribute expression { text }
 table-of-contents =
   element table-of-contents { attlist-table-of-contents, toc-block+ }
 attlist-table-of-contents &= name-id
@@ -469,6 +468,9 @@ attlist-anchor &= attribute item { xsd:IDREF }
 # Break line
 br = element br { attlist-br, empty }
 attlist-br &= empty
+external-reference =
+  element external-reference { attlist-external-reference, empty }
+attlist-external-reference &= attribute * - (local:* | ns1:*) { text }*
 page-number = element page-number { attlist-page-number, empty }
 attlist-page-number &=
   attribute ref-id { xsd:IDREF },
@@ -541,7 +543,7 @@ any_content = (any_element | any_obfl | text)*
 ## 
 ##       This definition is complex because any id/idref values defined in obfl needs to be retained using an enumerated list.
 ##       For these elements, the id/idref attributes are retained as optional. This will work for many situations, but it will
-##       fail in some cases, for example if the same id is used on two obfl elements inside different branches of an xslt choice 
+##       fail in some cases, for example if the same id is used on two obfl elements inside different branches of an xslt choice
 ##       statement.
 ##     
 any_obfl =

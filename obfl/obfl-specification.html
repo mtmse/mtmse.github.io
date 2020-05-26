@@ -6,7 +6,7 @@
   <meta name="dc:identifier" content=""/>
   <meta name="dc:Title" content="OBFL Specification"/>
   <meta name="dc:Language" content="en"/>
-  <meta name="dc:Date" content="2020-04-17T14:05+02:00"/>
+  <meta name="dc:Date" content="2020-05-26T12:32+02:00"/>
   <link rel="stylesheet" href="styles/w3c-unofficial.css" type="text/css"/>
   <link rel="stylesheet" href="styles/style.css" type="text/css"/>
 </head>
@@ -14,11 +14,11 @@
 <body>
 <h1 id="N65581">OBFL - Open Braille Formatting Language</h1>
 
-<p>Working draft, revised 2019-12-02 (UTC+01:00)</p>
-<p>Published 2020-04-17T14:05+02:00</p>
+<p>Working draft, revised 2020-04-29 (UTC+01:00)</p>
+<p>Published 2020-05-26T12:32+02:00</p>
 <dl>
   <dt>This version:</dt>
-    <dd><a href="https://braillespecs.github.io/obfl/obfl-specification.html">https://braillespecs.github.io/obfl/obfl-specification.html</a></dd>
+    <dd><a href="https://mtmse.github.io/obfl/obfl-specification.html">https://mtmse.github.io/obfl/obfl-specification.html</a></dd>
   <dt>Author:</dt>
     <dd>Joel Håkansson</dd>
   <dt>Contributors:</dt>
@@ -39,14 +39,15 @@ format for representing text formatting layout. OBFL is an <a href="#ref-xml">XM
 <p>The following changes have been introduced that break compatibility with preceding versions
 (listed by date of change):</p>
 
-<p>20191202T11:00:00 (ins): <a href="#N68796">The table of contents is a hierarchy of toc-block
-elements with toc-entry elements as inline content.</a></p><p>20191202T11:00:00 (ins): <a href="#N68880">The toc-entry element has only inline content.</a></p>
+<p>20191202T11:00:00 (ins): <a href="#N68857">The table of contents is a hierarchy of toc-block
+elements with toc-entry elements as inline content.</a></p><p>20191202T11:00:00 (ins): <a href="#N68941">The toc-entry element has only inline content.</a></p><p>20200429T15:00:00 (ins): <a href="#N68244">The external-reference element can be attached to any position in the text
+  within the block to send information through the implementation from obfl to pef.</a></p>
 
 <div class="note">
-<p>After a period of one year from the time of the change, the change is no longer
+<p>After a period of one year from the time of the change, the change is no longer 
 seen as incompatible. In practice, this means that:</p>
 <ul>
-<li>a section marked as deleted may be completely removed</li>
+<li>a section marked as deleted may be completely removed</li> 
 <li>a section marked as inserted may be unmarked</li>
 </ul>
 <p>In both cases, the change will be removed from the above list.</p>
@@ -57,7 +58,7 @@ seen as incompatible. In practice, this means that:</p>
 <h2 id="L77">Table of Contents</h2>
 
 <ul><li><a href="#L255">Introduction</a><ul><li><a href="#L261">What is OBFL?</a></li><li><a href="#L265">Why is OBFL Necessary?</a></li><li><a href="#L279">Scope Limitations</a></li></ul></li><li><a href="#L287">Definitions</a><ul><li><a href="#L295">Terminology</a></li><li><a href="#L302">General Terms</a></li><li><a href="#L425">Axes and Node Types</a></li><li><a href="#L449">Relationship to Other Specifications</a></li></ul></li><li><a href="#L453">Definition of OBFL</a><ul><li><a href="#L459">Document Conformance </a></li><li><a href="#L493">Using OBFL with Other
-Namespaces</a></li><li><a href="#L501">Internet Media Type and File Extension</a></li></ul></li><li><a href="#L502">White Space Processing</a><ul><li><a href="#L632">Problems with White Space</a></li><li><a href="#L657">Implications of Incorrect White Space</a></li><li><a href="#L671">Default White Space Processing</a></li></ul></li><li><a href="#L5021">Pagination</a><ul><li><a href="#L5022">Main Flow</a></li><li><a href="#L5025">Auxiliary Flows</a></li><li><a href="#L5023">Simplex</a></li><li><a href="#L5024">Duplex</a></li></ul></li><li><a href="#N66182">Page Model</a><ul><li><a href="#N66192">Recto (front side)</a></li><li><a href="#N66286">Verso (back side)</a></li></ul></li><li><a href="#L558">Elements</a><ul><li><a href="#L856">The Root Element</a><ul><li><a href="#L565">obfl</a></li></ul></li><li><a href="#L949">Document Metadata</a><ul><li><a href="#L587">meta</a></li></ul></li><li><a href="#L967">Page Templates</a><ul><li><a href="#L5871">layout-master</a></li><li><a href="#L608">template</a></li><li><a href="#L608-2">default-template</a></li><li><a href="#L647">page-area</a></li><li><a href="#L20904">fallback</a></li><li><a href="#L20925">rename</a></li><li><a href="#L629">before</a></li><li><a href="#L6291">after</a></li><li><a href="#L62911">header</a></li><li><a href="#L6471">footer</a></li><li><a href="#L1296">margin-region</a></li><li><a href="#L1328">indicators</a></li><li><a href="#L1329">marker-indicator</a><ul><li><a href="#L1365">Example</a></li></ul></li><li><a href="#L665">field</a></li><li><a href="#L683">marker-reference</a><ul><li><a href="#L1333">start-offset</a></li></ul></li><li><a href="#L696">string</a></li><li><a href="#L709">current-page</a></li></ul></li><li><a href="#L1631">Sequences</a><ul><li><a href="#L906">sequence</a></li><li><a href="#L11470">dynamic-sequence</a></li></ul></li><li><a href="#L1765">Blocks</a><ul><li><a href="#L1023">block</a></li></ul></li><li><a href="#L1894">Inline Content</a><ul><li><a href="#L722">evaluate</a><ul><li><a href="#L1033">Example</a></li></ul></li><li><a href="#L1207">leader</a></li><li><a href="#L1353">marker</a></li><li><a href="#L924">anchor</a></li><li><a href="#L1438">br</a></li><li><a href="#L836">page-number</a></li><li><a href="#L849">span</a></li><li><a href="#L8491">style</a></li></ul></li><li><a href="#L2227">Tabular Data</a><ul><li><a href="#L2229">table</a><ul><li><a href="#table-margins">Borders in and Around Tables</a></li></ul></li><li><a href="#thead">thead</a></li><li><a href="#tbody">tbody</a></li><li><a href="#L2253">tr</a></li><li><a href="#L2277">td</a></li></ul></li><li><a href="#L2167">Table of Contents</a><ul><li><a href="#L735">table-of-contents</a></li><li><a href="#L735">toc-block</a></li><li><a href="#L1105">toc-entry</a></li><li><a href="#L1105">toc-entry-on-resumed</a></li><li><a href="#L9241">toc-sequence</a></li><li><a href="#L9514">on-toc-start</a></li><li><a href="#L969">on-volume-start</a></li><li><a href="#L987">on-volume-end</a></li><li><a href="#L1005">on-toc-end</a></li></ul></li><li><a href="#L2433">Volume Templates</a><ul><li><a href="#L84911">volume-template</a></li><li><a href="#L870">pre-content</a></li><li><a href="#L888">post-content</a></li><li><a href="#L8701">volume-transition</a><ul><li><a href="#L22731">Example</a></li></ul></li><li><a href="#L8702">block-interrupted</a></li><li><a href="#L8703">block-resumed</a></li><li><a href="#L8704">sequence-interrupted</a></li><li><a href="#L8705">sequence-resumed</a></li><li><a href="#N69677">any-interrupted</a></li><li><a href="#N69710">any-resumed</a></li></ul></li><li><a href="#L2529">Achored Data</a><ul><li><a href="#L1194">collection</a></li><li><a href="#L1210">item</a></li><li><a href="#L9242">list-of-references</a></li><li><a href="#L951">on-collection-start</a></li><li><a href="#L9511">on-page-start</a></li><li><a href="#L9512">on-page-end</a></li><li><a href="#L9513">on-collection-end</a></li></ul></li><li><a href="#L2715">Dynamic Source Data Processing</a><ul><li><a href="#L2248">xml-data</a><ul><li><a href="#L2273">Example</a></li></ul></li><li><a href="#L2724">renderer</a></li><li><a href="#L2749">rendering-scenario</a><ul><li><a href="#L2793">Example</a></li></ul></li><li><a href="#N70230">parameter</a></li><li><a href="#L2690">xml-processor</a><ul><li><a href="#L2720">Example</a></li></ul></li><li><a href="#L1607">xml-processor-result</a><ul><li><a href="#L2721">Example</a></li></ul></li><li><a href="#L432">file-reference</a><ul><li><a href="#L27214">Example</a></li></ul></li></ul></li></ul></li><li><a href="#L1608">Attribute Definitions</a><ul><li><a href="#L21839">hyphenate</a><ul><li><a href="#L21851">Example</a></li></ul></li><li><a href="#pagenumbercounter">page-number-counter</a></li><li><a href="#rowspacing">row-spacing</a></li><li><a href="#L2462">translate</a><ul><li><a href="#L2475">pre-translated</a></li></ul></li></ul></li><li><a href="#L16081">Attribute Groups</a><ul><li><a href="#block-atts">Block</a><ul><li><a href="#L2519">Collapsing Margins</a></li><li><a href="#L2536">Example</a></li></ul></li><li><a href="#borders">Borders</a></li><li><a href="#margin-atts">Margin</a></li><li><a href="#padding-atts">Padding</a></li></ul></li><li><a href="#L756">Rule Sets</a><ul><li><a href="#L763">Relax NG Rule Set</a></li><li><a href="#L774">Other Rule Sets</a></li></ul></li><li><a href="#L784">References</a><ul><li><a href="#L786">Normative References</a></li><li><a href="#L881">Informative References</a></li></ul></li></ul>
+Namespaces</a></li><li><a href="#L501">Internet Media Type and File Extension</a></li></ul></li><li><a href="#L502">White Space Processing</a><ul><li><a href="#L632">Problems with White Space</a></li><li><a href="#L657">Implications of Incorrect White Space</a></li><li><a href="#L671">Default White Space Processing</a></li></ul></li><li><a href="#L5021">Pagination</a><ul><li><a href="#L5022">Main Flow</a></li><li><a href="#L5025">Auxiliary Flows</a></li><li><a href="#L5023">Simplex</a></li><li><a href="#L5024">Duplex</a></li></ul></li><li><a href="#N66182">Page Model</a><ul><li><a href="#N66192">Recto (front side)</a></li><li><a href="#N66286">Verso (back side)</a></li></ul></li><li><a href="#L558">Elements</a><ul><li><a href="#L856">The Root Element</a><ul><li><a href="#L565">obfl</a></li></ul></li><li><a href="#L949">Document Metadata</a><ul><li><a href="#L587">meta</a></li></ul></li><li><a href="#L967">Page Templates</a><ul><li><a href="#L5871">layout-master</a></li><li><a href="#L608">template</a></li><li><a href="#L608-2">default-template</a></li><li><a href="#L647">page-area</a></li><li><a href="#L20904">fallback</a></li><li><a href="#L20925">rename</a></li><li><a href="#L629">before</a></li><li><a href="#L6291">after</a></li><li><a href="#L62911">header</a></li><li><a href="#L6471">footer</a></li><li><a href="#L1296">margin-region</a></li><li><a href="#L1328">indicators</a></li><li><a href="#L1329">marker-indicator</a><ul><li><a href="#L1365">Example</a></li></ul></li><li><a href="#L665">field</a></li><li><a href="#L683">marker-reference</a><ul><li><a href="#L1333">start-offset</a></li></ul></li><li><a href="#L696">string</a></li><li><a href="#L709">current-page</a></li></ul></li><li><a href="#L1631">Sequences</a><ul><li><a href="#L906">sequence</a></li><li><a href="#L11470">dynamic-sequence</a></li></ul></li><li><a href="#L1765">Blocks</a><ul><li><a href="#L1023">block</a></li></ul></li><li><a href="#L1894">Inline Content</a><ul><li><a href="#L722">evaluate</a><ul><li><a href="#L1033">Example</a></li></ul></li><li><a href="#L1207">leader</a></li><li><a href="#L1353">marker</a></li><li><a href="#L924">anchor</a></li><li><a href="#L1438">br</a></li><li><a href="#L836">page-number</a></li><li><a href="#L840">external-reference</a><ul><li><a href="#L1331">Example</a></li></ul></li><li><a href="#L849">span</a></li><li><a href="#L8491">style</a></li></ul></li><li><a href="#L2227">Tabular Data</a><ul><li><a href="#L2229">table</a><ul><li><a href="#table-margins">Borders in and Around Tables</a></li></ul></li><li><a href="#thead">thead</a></li><li><a href="#tbody">tbody</a></li><li><a href="#L2253">tr</a></li><li><a href="#L2277">td</a></li></ul></li><li><a href="#L2167">Table of Contents</a><ul><li><a href="#L735">table-of-contents</a></li><li><a href="#L735">toc-block</a></li><li><a href="#L1105">toc-entry</a></li><li><a href="#L1105">toc-entry-on-resumed</a></li><li><a href="#L9241">toc-sequence</a></li><li><a href="#L9514">on-toc-start</a></li><li><a href="#L969">on-volume-start</a></li><li><a href="#L987">on-volume-end</a></li><li><a href="#L1005">on-toc-end</a></li></ul></li><li><a href="#L2433">Volume Templates</a><ul><li><a href="#L84911">volume-template</a></li><li><a href="#L870">pre-content</a></li><li><a href="#L888">post-content</a></li><li><a href="#L8701">volume-transition</a><ul><li><a href="#L22731">Example</a></li></ul></li><li><a href="#L8702">block-interrupted</a></li><li><a href="#L8703">block-resumed</a></li><li><a href="#L8704">sequence-interrupted</a></li><li><a href="#L8705">sequence-resumed</a></li><li><a href="#N69738">any-interrupted</a></li><li><a href="#N69771">any-resumed</a></li></ul></li><li><a href="#L2529">Achored Data</a><ul><li><a href="#L1194">collection</a></li><li><a href="#L1210">item</a></li><li><a href="#L9242">list-of-references</a></li><li><a href="#L951">on-collection-start</a></li><li><a href="#L9511">on-page-start</a></li><li><a href="#L9512">on-page-end</a></li><li><a href="#L9513">on-collection-end</a></li></ul></li><li><a href="#L2715">Dynamic Source Data Processing</a><ul><li><a href="#L2248">xml-data</a><ul><li><a href="#L2273">Example</a></li></ul></li><li><a href="#L2724">renderer</a></li><li><a href="#L2749">rendering-scenario</a><ul><li><a href="#L2793">Example</a></li></ul></li><li><a href="#N70291">parameter</a></li><li><a href="#L2690">xml-processor</a><ul><li><a href="#L2720">Example</a></li></ul></li><li><a href="#L1607">xml-processor-result</a><ul><li><a href="#L2721">Example</a></li></ul></li><li><a href="#L432">file-reference</a><ul><li><a href="#L27214">Example</a></li></ul></li></ul></li></ul></li><li><a href="#L1608">Attribute Definitions</a><ul><li><a href="#L21839">hyphenate</a><ul><li><a href="#L21851">Example</a></li></ul></li><li><a href="#pagenumbercounter">page-number-counter</a></li><li><a href="#rowspacing">row-spacing</a></li><li><a href="#L2462">translate</a><ul><li><a href="#L2475">pre-translated</a></li></ul></li></ul></li><li><a href="#L16081">Attribute Groups</a><ul><li><a href="#block-atts">Block</a><ul><li><a href="#L2519">Collapsing Margins</a></li><li><a href="#L2536">Example</a></li></ul></li><li><a href="#borders">Borders</a></li><li><a href="#margin-atts">Margin</a></li><li><a href="#padding-atts">Padding</a></li></ul></li><li><a href="#L756">Rule Sets</a><ul><li><a href="#L763">Relax NG Rule Set</a></li><li><a href="#L774">Other Rule Sets</a></li></ul></li><li><a href="#L784">References</a><ul><li><a href="#L786">Normative References</a></li><li><a href="#L881">Informative References</a></li></ul></li></ul>
 
 <h2 id="L255">Introduction</h2>
 
@@ -229,7 +230,7 @@ children can be reformatted, even if:</p>
 <p>White space can be introduced manually. For example, by adding an XML
 comment:</p>
 <pre>	&lt;block&gt;
-	&lt;!-- Just an innocent comment at the start of a new block --&gt;
+	&lt;!-- Just an innocent comment at the start of a new block --&gt; 
 	We offer free &lt;style name="em"&gt;technical support&lt;/style&gt; for subscribers.&lt;/block&gt;</pre>
 
 <p>or when nesting block elements:</p>
@@ -290,7 +291,7 @@ following:</p>
   <li>white space at the start or end of inline elements should be rendered
     outside of the element</li>
 </ul>
-<!--
+<!-- 
 <pre>
   &lt;block>We offer free &lt;style name="em">technical support&lt;/style> for subscribers.&lt;/block>
 and not:
@@ -299,7 +300,7 @@ and not:
  -->
 <!--
 
-<p>Any text, including white space, in OBFL elements that are not allowed to contain text should be disregarded
+<p>Any text, including white space, in OBFL elements that are not allowed to contain text should be disregarded 
 in the rendering process.</p>
 
 <p>Therefore, the following OBFL fragment:</p>
@@ -309,32 +310,32 @@ in the rendering process.</p>
 <p>should be interpreted by default as:</p>
 <pre>
   &lt;block>We offer free &lt;style name="em">technical support&lt;/style> for subscribers.&lt;/block>
-</pre>
+</pre> 
  -->
 
 <h2 id="L5021">Pagination</h2>
 
 <p><strong>This section is normative.</strong></p>
 
-<p>The following describes the default pagination behavior and applies unless otherwise
+<p>The following describes the default pagination behavior and applies unless otherwise 
 specified.</p>
 
 <h3 id="L5022">Main Flow</h3>
-
+  
 <p class="markup">Pages in the main flow are counted together in document order, starting from
 1.</p>
 
 <h3 id="L5025">Auxiliary Flows</h3>
-<p class="markup">Pages in pre-content and post-content are counted together within the boundaries of each instance
+<p class="markup">Pages in pre-content and post-content are counted together within the boundaries of each instance 
 of these containers, starting from 1 each time.</p>
 
 <h3 id="L5023">Simplex</h3>
-<p class="markup">In a sequence where duplex is not enabled, only the front side of sheets are counted and paginated.
+<p class="markup">In a sequence where duplex is not enabled, only the front side of sheets are counted and paginated. 
 The back side of sheets are neither counted nor paginated.</p>
 
 <h3 id="L5024">Duplex</h3>
 <p class="markup">In a sequence where duplex is enabled, both sides of sheets are counted and paginated.
-However, if the last sheet of a duplex sequence only has content on the front side,
+However, if the last sheet of a duplex sequence only has content on the front side, 
 the back side is counted, but not <em>paginated</em>.</p>
 
 <h2 id="N66182">Page Model</h2>
@@ -351,7 +352,7 @@ the back side is counted, but not <em>paginated</em>.</p>
 The inner and outer margins span the full height of the page.</p>
 
 <p>The <strong>left margin region</strong> is to the left of the text body. The <strong>right margin region</strong> is to the right of the text body.
-Stacked above and below these three areas (and spanning the full width of them) are the page area, header and footer.
+Stacked above and below these three areas (and spanning the full width of them) are the page area, header and footer. 
 The top and bottom page area are closest to the center. The header and footer are closest to the edge of the paper.</p>
 
 <p>Note that if text flow is allowed in the header/footer area, the area of the header/footer is reduced to align with
@@ -415,7 +416,7 @@ the text body area so that the margin area can be used as well.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>meta [optional]</li>
         <li>layout-master [1 or more]</li>
@@ -504,7 +505,7 @@ as the width and height of pages.</p>
       group.</p>
     </dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>template [0 or more]</li>
         <li>default-template [required]</li>
@@ -534,7 +535,7 @@ text flow area is reduced by the combined width of the margin-regions.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>header [1 or more]</li>
         <li>footer [1 or more]</li>
@@ -555,7 +556,7 @@ applies.</p>
   <dt>Usage</dt>
     <dd>layout-master</dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>header [1 or more]</li>
         <li>footer [1 or more]</li>
@@ -586,7 +587,7 @@ collection.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>fallback [optional]</li>
         <li>before [optional]</li>
@@ -656,7 +657,7 @@ area.</p>
       group.</p>
     </dd>
   <dt>Content Model</dt>
-    <dd>block, text(), leader, marker, br, evaluate, page-number,
+    <dd>block, text(), leader, marker, br, evaluate, page-number, external-reference,
       marker-reference, span, style [0 or more]</dd>
 </dl>
 </div>
@@ -678,7 +679,7 @@ area.</p>
       group.</p>
     </dd>
   <dt>Content Model</dt>
-    <dd>block, text(), leader, marker, br, evaluate, page-number,
+    <dd>block, text(), leader, marker, br, evaluate, page-number, external-reference,
       marker-reference, span, style [0 or more]</dd>
 </dl>
 </div>
@@ -850,7 +851,7 @@ markers are present on the indicated row.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd class="markup">marker-reference, string, current-page, evaluate [0 or
+    <dd class="markup">marker-reference, string, current-page, external-reference, evaluate [0 or
       more]</dd>
 </dl>
 </div>
@@ -1001,7 +1002,7 @@ the current page, using the number format specified by this element.</p>
             information.</dd>
 		<dt>break-before [optional]</dt>
           <dd class="no-markup">Inserts a break before the sequence begins.</dd>
-          <dd>This property only applies to text body sequences.</dd>
+          <dd>This property only applies to text body sequences.</dd> 
           <dd>One of 'auto' (default), 'volume'.</dd>
       </dl>
     </dd>
@@ -1071,20 +1072,20 @@ should be excluded entirely.</p>
     </dd>
   <dt>Special Attributes</dt>
     <dd>The following attributes only apply to block elements in the context of
-      the text body.
+      the text body. 
       <dl>
         <dt>keep-with-previous-sheets [optional]</dt>
           <dd>Indicates that <em>the end of</em> this block should be kept in
             the same volume as the specified number of preceding sheets. This is
             similar to widows, but for pages in a volume instead of rows on a
-            page The priority of this property is higher than the priority for
+            page The priority of this property is higher than the priority for 
             the whole block, as specified by volume-keep-priority.</dd>
           <dd>An integer in the range [0, 9]</dd>
         <dt>keep-with-next-sheets [optional]</dt>
           <dd>Indicates that <em>the beginning of</em> this block should be
             kept in the same volume as the specified number of following
           sheets. This is similar to orphans, but for pages in a volume instead
-           of rows on a page. The priority of this property is higher than the
+           of rows on a page. The priority of this property is higher than the 
            priority for the whole block, as specified by volume-keep-priority.</dd>
           <dd>An integer in the range [0, 9]</dd>
         <dt>volume-keep-priority [optional]</dt>
@@ -1148,7 +1149,7 @@ should be excluded entirely.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>text(), leader, marker, br, evaluate, page-number, marker-reference,
+    <dd>text(), leader, marker, br, evaluate, page-number, external-reference, marker-reference,
       span, style, anchor, block, table, xml-data [0 or more]</dd>
 </dl>
 </div>
@@ -1174,11 +1175,6 @@ information.</p>
         <dt>text-style [optional]</dt>
           <dd>A text style, e.g. emphasis or strong</dd>
           <dd class="markup note">This attribute is only available in the context of a field element.</dd>
-        <dt>number-format [optional]</dt>
-          <dd>One of 'default', 'roman', 'upper-roman', 'lower-roman',
-            'upper-alpha', 'lower-alpha'.</dd>
-          <dd class="markup note">This attribute may only be used when the
-            expression evaluates to a numeric value.</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -1301,6 +1297,55 @@ element.</p>
 </dl>
 </div>
 
+<h4 id="L840" class="include">external-reference</h4>
+
+<ins id="N68244" datetime="20200429T15:00:00">The external-reference element can be attached to any position in the text
+  within the block to send information through the implementation from obfl to pef.</ins>
+
+<p>With the external-reference element custom annotations can be attached to any position in the text within
+  a block or field. How the user agent processes the information is implementation dependent.</p>
+
+<div class="sidebar markup">
+<dl>
+  <dt>Usage</dt>
+    <dd>block</dd>
+  <dt>Attributes</dt>
+    <dd>
+      <dl>
+        <dt>any attribute [optional]</dt>
+          <dd/>
+      </dl>
+    </dd>
+  <dt>Content Model</dt>
+    <dd>Empty.</dd>
+</dl>
+</div>
+
+<h5 id="L1331">Example</h5>
+<p>A typical use case is to pass information through unchanged from the source document to the destination,
+  for instance a PEF document [<a class="nref" href="#ref-pef">PEF</a>]. The result document is annotated with the exact same information attached
+  to the corresponding positions in the braille.</p>
+
+<div class="example">
+  <pre>
+    &lt;obfl&gt;
+      ...
+        &lt;block&gt;&lt;external-reference example:key="value"/&gt;This is some text&lt;/block&gt;
+      ...
+    &lt;/obfl&gt;
+  </pre>
+</div>
+
+<div class="example">
+  <pre>
+    &lt;pef&gt;
+      ...
+        &lt;row example:key="value"&gt;⠠⠞⠓⠊⠎ ⠊⠎ ⠎⠕⠍⠑ ⠞⠑⠭⠞&lt;/row&gt;
+      ...
+    &lt;/pef&gt;
+  </pre>
+</div>
+
 <h4 id="L849" class="include">span</h4>
 
 <p>The span element represents a segment of text whose hyphenation policy or
@@ -1347,7 +1392,7 @@ emphasis or strong.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>text(), style, marker, br, anchor, evaluate, page-number,
+    <dd>text(), style, marker, br, anchor, evaluate, page-number, external-reference,
     marker-reference [0 or more]</dd>
 </dl>
 </div>
@@ -1408,7 +1453,7 @@ of a table.</p>
     </ul></dd>
 </dl>
 </div>
-
+  
   <h5 id="table-margins">Borders in and Around Tables</h5>
   <p>Table cell borders collapse unless table-col-spacing &gt; 0 or table-row-spacing &gt; 0.</p>
   <div class="example">
@@ -1418,7 +1463,7 @@ of a table.</p>
     </ul>
   </div>
   <p>Table borders will collapse with cell borders, if not separated by padding.
-    Table borders takes precedence over cell borders, unless the table's border
+    Table borders takes precedence over cell borders, unless the table's border 
     style is 'none'.</p>
   <div class="example">
   <p>Algorithm for selecting a border between a cell and the table border:</p>
@@ -1428,7 +1473,7 @@ of a table.</p>
     <li>else use the table's border</li>
   </ul>
   </div>
-  <p>Table cell borders will combine to a form a single border, that is a mix between the
+  <p>Table cell borders will combine to a form a single border, that is a mix between the 
     two borders.</p>
   <div class="example">
     <p>Algorithm for selecting a shared border for cells A and B:</p>
@@ -1444,7 +1489,7 @@ of a table.</p>
     </ul>
   </div>
   <div class="note">
-  	<p>Note that the presence of a border on one cell will offset the placement of all cells within that row and
+  	<p>Note that the presence of a border on one cell will offset the placement of all cells within that row and 
   	column to the same extent, even if they themselves do not have borders. The cells that do not have borders
   	will have extra empty space in it's place.</p>
   </div>
@@ -1453,7 +1498,7 @@ of a table.</p>
 <p>The thead element represents a row of repeating header cells in a table.
 The cells in the header will repeat at the start of each page that the
 table spans.</p>
-
+  
 <div class="sidebar markup">
   <dl>
     <dt>Usage</dt>
@@ -1468,7 +1513,7 @@ table spans.</p>
   <div class="note">
     <p>Note that the identifier attribute will be disregarded for all descendant elements of thead.</p>
   </div>
-
+  
   <h4 id="tbody" class="include">tbody</h4>
 
 <p>The tbody element represents the body cells in a table.</p>
@@ -1522,7 +1567,7 @@ table spans.</p>
         and <a href="#padding-atts">Padding</a> attributes groups.</p>
     </dd>
   <dt>Content Model</dt>
-  <dd>text(), leader, marker, br, evaluate, page-number, marker-reference, span,
+  <dd>text(), leader, marker, br, evaluate, page-number, external-reference, marker-reference, span,
   style, anchor, block, xml-data [0 or more]</dd>
 </dl>
 </div>
@@ -1535,7 +1580,7 @@ table spans.</p>
 Note that this element specifies formatting of data in a table of contents, it
 does not by it self specify that a table of contents should be inserted.</p>
 
-<ins id="N68796" datetime="20191202T11:00:00">The table of contents is a hierarchy of toc-block
+<ins id="N68857" datetime="20191202T11:00:00">The table of contents is a hierarchy of toc-block
 elements with toc-entry elements as inline content.</ins>
 
 <div class="sidebar markup">
@@ -1578,7 +1623,7 @@ conditional container of content. In a volume-ranged toc-sequence, the content
 will only be rendered if the block the toc-entry refers to starts in the current
 volume. In a document-ranged toc-sequence, the content will always be rendered.</p>
 
-<ins id="N68880" datetime="20191202T11:00:00">The toc-entry element has only inline content.</ins>
+<ins id="N68941" datetime="20191202T11:00:00">The toc-entry element has only inline content.</ins>
 
 <div class="sidebar markup">
 <dl>
@@ -1591,7 +1636,7 @@ volume. In a document-ranged toc-sequence, the content will always be rendered.<
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>text(), leader, marker, br, evaluate, page-number, marker-reference,
+    <dd>text(), leader, marker, br, evaluate, page-number, external-reference, marker-reference,
       span, style [0 or more]</dd>
 </dl>
 </div>
@@ -1636,7 +1681,7 @@ more than once. The range consists of two block ids (the latter is optional).</p
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>text(), leader, marker, br, evaluate, page-number, marker-reference,
+    <dd>text(), leader, marker, br, evaluate, page-number, external-reference, marker-reference,
       span, style [0 or more]</dd>
 </dl>
 </div>
@@ -1685,7 +1730,7 @@ data.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>on-toc-start [0 or more]</li>
         <li>on-volume-start [0 or more]</li>
@@ -1820,7 +1865,7 @@ toc-sequence.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>pre-content [optional]</li>
         <li>post-content [optional]</li>
@@ -1858,15 +1903,15 @@ volume's body of pages.</p>
 </div>
 
 <h4 id="L8701" class="include">volume-transition</h4>
-
+  
   <div class="note">
     <p>This feature is incubating (2018-01-18). This means that the feature is
       currently a work-in-progress and may change or disappear at any time.</p>
   </div>
-
+  
   <p>The transition element defines a volume transition.</p>
   <p>When this element is present, the last page or sheet in each volume (except the last volume)
-  may be modified so that the volume break occurs earlier than usual: preferably between
+  may be modified so that the volume break occurs earlier than usual: preferably between 
   two blocks, or if that is not possible, between words. The left over contents is moved
   to the next volume. If volume-keep-priority is used, it will be used to determine a suitable
   break point.</p>
@@ -1883,7 +1928,7 @@ volume's body of pages.</p>
     	<dd>Specifies the range within which content can be moved off the last sheet in a volume.</dd>
     	<dd>One of 'page' (default) or 'sheet'.</dd>
     	<dd>If the range is 'page', content on the last page can be moved to the next volume.
-    	If the range is 'sheet', content on the last sheet can be moved. Note that if duplex
+    	If the range is 'sheet', content on the last sheet can be moved. Note that if duplex 
     	is off, the value of this attribute is irrelevant.</dd>
     </dl></dd>
     <dt>Content Model</dt>
@@ -1906,7 +1951,7 @@ volume's body of pages.</p>
   &lt;!-- If the last block has to be split up, use the following. --&gt;
   &lt;block-interrupted&gt;[The paragraph continues in the next volume. --Ed.]&lt;/block-interrupted&gt;
   &lt;block-resumed&gt;[Paragraph continued. --Ed]&lt;/block-resumed&gt;
-
+  
   &lt;!-- If the last block is short enough to fit on the page, use the following. --&gt;
   &lt;sequence-interrupted&gt;
     &lt;block&gt;[The chapter continues in the next volume. --Ed.]&lt;/block&gt;
@@ -1914,14 +1959,14 @@ volume's body of pages.</p>
   &lt;sequence-resumed&gt;
     &lt;block&gt;[Continued from previous volume. --Ed.]&lt;/block&gt;
   &lt;/sequence-resumed&gt;
-
+  
   &lt;any-interrupted&gt;
     &lt;block&gt;--- End of volume ---&lt;/block&gt;
   &lt;/any-interrupted&gt;
   &lt;any-resumed&gt;
     &lt;block&gt;--- Volume begins ---&lt;/block&gt;
   &lt;/any-resumed&gt;
-
+  
 &lt;/volume-transition&gt;
 </pre>
 </div>
@@ -1937,11 +1982,11 @@ volume's body of pages.</p>
     <dt>Usage</dt>
     <dd>volume-transition</dd>
     <dt>Content Model</dt>
-    <dd>text(), leader, marker, br, evaluate, page-number, marker-reference,
+    <dd>text(), leader, marker, br, evaluate, page-number, external-reference, marker-reference,
     span, style [0 or more]</dd>
   </dl>
 </div>
-
+  
   <h4 id="L8703" class="include">block-resumed</h4>
   <div class="note">
     <p>This feature is incubating (2018-01-18). This means that the feature is
@@ -1953,7 +1998,7 @@ volume's body of pages.</p>
       <dt>Usage</dt>
       <dd>volume-transition</dd>
       <dt>Content Model</dt>
-      <dd>text(), leader, marker, br, evaluate, page-number, marker-reference,
+      <dd>text(), leader, marker, br, evaluate, page-number, external-reference, marker-reference,
       span, style [0 or more]</dd>
     </dl>
   </div>
@@ -1972,7 +2017,7 @@ volume's body of pages.</p>
       <dd>block [0 or more]</dd>
     </dl>
   </div>
-
+  
   <h4 id="L8705" class="include">sequence-resumed</h4>
   <div class="note">
     <p>This feature is incubating (2018-01-18). This means that the feature is
@@ -1988,7 +2033,7 @@ volume's body of pages.</p>
     </dl>
   </div>
 
-  <h4 id="N69677" class="include">any-interrupted</h4>
+  <h4 id="N69738" class="include">any-interrupted</h4>
   <div class="note">
     <p>This feature is incubating (2018-09-24). This means that the feature is
       currently a work-in-progress and may change or disappear at any time.</p>
@@ -2004,8 +2049,8 @@ volume's body of pages.</p>
       <dd>block [0 or more]</dd>
     </dl>
   </div>
-
-  <h4 id="N69710" class="include">any-resumed</h4>
+  
+  <h4 id="N69771" class="include">any-resumed</h4>
   <div class="note">
     <p>This feature is incubating (2018-09-24). This means that the feature is
       currently a work-in-progress and may change or disappear at any time.</p>
@@ -2060,7 +2105,7 @@ flow. The behavior of this element is similar to the toc-entry element.</p>
       group.</p>
     </dd>
   <dt>Content Model</dt>
-    <dd>block, text(), leader, marker, br, evaluate, page-number,
+    <dd>block, text(), leader, marker, br, evaluate, page-number, external-reference,
       marker-reference, span, style [0 or more]</dd>
 </dl>
 </div>
@@ -2087,7 +2132,7 @@ sequence.  The actual items are collected from the referenced collection.</p>
       </dl>
     </dd>
   <dt>Content Model</dt>
-    <dd>In this order:
+    <dd>In this order: 
       <ul>
         <li>on-collection-start [optional]</li>
         <li>on-volume-start [optional]</li>
@@ -2244,7 +2289,7 @@ applied to a given xml-data.</p>
           <dd>Specifies an XPath expression to be used to qualify a scenario
             for rendering. If a scenario doesn't qualify on a given xml-data,
             it is excluded from rendering and subsequent cost evaluation.</dd>
-          <dd class="no-markup">The XPath expression must:
+          <dd class="no-markup">The XPath expression must: 
             <ul>
               <li>use namespace prefixes bound in the context of this element
                 (the default namespace cannot be used)</li>
@@ -2263,13 +2308,13 @@ applied to a given xml-data.</p>
 &lt;renderer name="table-renderer"&gt;
 	&lt;rendering-scenario xmlns:html="http://www.w3.org/1999/xhtml"
 			qualifier="/html:table/max(html:tr/sum(html:td/(if (@colspan) then @colspan else 1)))&lt;=2"
-			processor="simple-table-processor"
+			processor="simple-table-processor" 
 			cost="(+ (- 30 $min-block-width) $total-height)"/&gt;
 &lt;/renderer&gt;
 </pre>
 </div>
 
-<h4 id="N70230" class="include">parameter</h4>
+<h4 id="N70291" class="include">parameter</h4>
 
 <p>Defines a parameter for a rendering-scenario.</p>
 
@@ -2453,14 +2498,14 @@ characters):</p>
     <tr>
       <td rowspan="2">ex-ample</td>
       <td>true</td>
-      <td>ex-
+      <td>ex- 
 
         <p>ample</p>
       </td>
     </tr>
     <tr>
       <td>false</td>
-      <td>ex-
+      <td>ex- 
 
         <p>ample</p>
       </td>
@@ -2468,7 +2513,7 @@ characters):</p>
     <tr>
       <td rowspan="2">example</td>
       <td>true</td>
-      <td>ex-
+      <td>ex- 
 
         <p>ample</p>
       </td>
@@ -2481,20 +2526,20 @@ characters):</p>
     </tr>
   </tbody>
 </table>
-
+  
 <h3 id="pagenumbercounter">page-number-counter</h3>
 
   <p>Specifies a name for a page number counter to use.</p>
-  <p class="markup">By default, all sequences in the
-    text body are counted together, whereas sequences in pre-content
+  <p class="markup">By default, all sequences in the 
+    text body are counted together, whereas sequences in pre-content 
     and post-content are counted together only within the boundaries of each
     instance. This behavior can be changed by using this attribute.</p>
-
+  
   <p>Pages in sequences having the same value for this attribute will have consecutive page
     numbers in document order.</p>
   <p>The value must be a token, but since this value is only used for grouping, no other
     restrictions apply.</p>
-
+  
   <div class="note"><p>Note that:</p>
     <ul>
     <li>Each page number counter starts with 1, unless another value is specified
@@ -2502,7 +2547,7 @@ characters):</p>
     <li>The <code>initial-page-number</code> attribute will affect the page numbers in following
       sequences with the same counter name.</li>
     </ul></div>
-
+  
  <h5 id="L272141">Example</h5>
   <div class="example">
     <p>The following will result in three pages with the page numbers: 1, A, 2:</p>
@@ -2760,7 +2805,7 @@ text-indent="0" ... ... ... ...
                   align="right"</pre>
 
                         <div class="dashed-box" style="margin-left: 1em">
-                        <pre>A child block with
+                        <pre>A child block with 
 block-indent="2"</pre>
                         </div>
                         <pre>row-spacing="1.0" ... ... ... .
@@ -2857,7 +2902,7 @@ block-indent="2"</pre>
     <dd>One of 'inner', 'center', 'outer'.</dd>
 </dl>
 </div>
-
+  
   <h3 id="margin-atts">Margin</h3>
   <div class="sidebar">
     <dl>
@@ -2875,7 +2920,7 @@ block-indent="2"</pre>
       <dd>A number.</dd>
     </dl>
   </div>
-
+  
   <h3 id="padding-atts">Padding</h3>
   <div class="sidebar">
     <dl>
@@ -2914,7 +2959,7 @@ this specification.</p>
 
 <p>The XML schema rule set "<a href="validation/obfl.xsd">validation/obfl.xsd</a>" forms an informative part
 of this specification.</p>
-<!--
+<!-- 
 <p>The DTD rule set "<a
 href="validation/obfl.rng">validation/obfl.dtd</a>" forms an informative part
 of this specification.</p>
@@ -2935,6 +2980,11 @@ of this specification.</p>
       Terms for Device Independence</a>", Rhys Lewis, 18 January 2005.<br/>
       <a href="http://www.w3.org/TR/di-gloss/">Latest version</a> available at:
       http://www.w3.org/TR/di-gloss/</dd>
+
+  <dt><a id="ref-pef"><strong>[PEF]</strong></a></dt>
+    <dd>"<a href="https://mtmse.github.io/pef/pef-specification.html">PEF 1.0 - Portable Embosser Format (Public draft)</a>",
+      Joel Håkansson, 12 September 2011.<br/>
+      <a href="https://mtmse.github.io/pef/">Latest version</a> available at: https://mtmse.github.io/pef</dd>
   <dt><a id="ref-rfc2119"><strong>[RFC2119]</strong></a></dt>
     <dd>"<a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119: Key words for
       use in RFCs to Indicate Requirement Levels</a>", S. Bradner, March
