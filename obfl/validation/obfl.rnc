@@ -195,7 +195,6 @@ attlist-layout-master &=
   attribute outer-margin { text }?,
   row-spacing,
   attribute duplex { "true" | "false" }?,
-  attribute page-number-variable { text }?,
   border-atts
 template = element template { attlist-template, template-children }
 attlist-template &= attribute use-when { text }
@@ -300,8 +299,6 @@ volume-template =
   }
 attlist-volume-template &=
   attribute use-when { text }?,
-  attribute volume-number-variable { text }?,
-  attribute volume-count-variable { text }?,
   attribute sheets-in-volume-max { text }
 pre-content =
   element pre-content {

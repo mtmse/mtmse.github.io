@@ -6,7 +6,7 @@
   <meta name="dc:identifier" content=""/>
   <meta name="dc:Title" content="OBFL Specification"/>
   <meta name="dc:Language" content="en"/>
-  <meta name="dc:Date" content="2020-05-26T12:32+02:00"/>
+  <meta name="dc:Date" content="2020-06-15T08:44+02:00"/>
   <link rel="stylesheet" href="styles/w3c-unofficial.css" type="text/css"/>
   <link rel="stylesheet" href="styles/style.css" type="text/css"/>
 </head>
@@ -15,7 +15,7 @@
 <h1 id="N65581">OBFL - Open Braille Formatting Language</h1>
 
 <p>Working draft, revised 2020-04-29 (UTC+01:00)</p>
-<p>Published 2020-05-26T12:32+02:00</p>
+<p>Published 2020-06-15T08:44+02:00</p>
 <dl>
   <dt>This version:</dt>
     <dd><a href="https://mtmse.github.io/obfl/obfl-specification.html">https://mtmse.github.io/obfl/obfl-specification.html</a></dd>
@@ -23,6 +23,7 @@
     <dd>Joel Håkansson</dd>
   <dt>Contributors:</dt>
     <dd>Bert Frees</dd>
+    <dd>Daniel Persson</dd>
     <dd>Paul Rambags</dd>
 </dl>
 
@@ -35,13 +36,13 @@ format for representing text formatting layout. OBFL is an <a href="#ref-xml">XM
 
 <p>This document is a working draft.</p>
 
-<h3 id="N65637">Backwards Incompatible Changes</h3>
+<h3 id="N65640">Backwards Incompatible Changes</h3>
 <p>The following changes have been introduced that break compatibility with preceding versions
 (listed by date of change):</p>
 
-<p>20191202T11:00:00 (ins): <a href="#N68857">The table of contents is a hierarchy of toc-block
-elements with toc-entry elements as inline content.</a></p><p>20191202T11:00:00 (ins): <a href="#N68941">The toc-entry element has only inline content.</a></p><p>20200429T15:00:00 (ins): <a href="#N68244">The external-reference element can be attached to any position in the text
-  within the block to send information through the implementation from obfl to pef.</a></p>
+<p>20191202T11:00:00 (ins): <a href="#N68986">The table of contents is a hierarchy of toc-block
+elements with toc-entry elements as inline content.</a></p><p>20191202T11:00:00 (ins): <a href="#N69070">The toc-entry element has only inline content.</a></p><p>20200429T15:00:00 (ins): <a href="#N68373">The external-reference element can be attached to any position in the text
+  within the block to send information through the implementation from obfl to pef.</a></p><p>20200608T19:00:00 (ins): <a href="#N66482">Variable names are fixed.</a></p><p>20200608T19:00:00 (ins): <a href="#N69620">Variable names are fixed.</a></p>
 
 <div class="note">
 <p>After a period of one year from the time of the change, the change is no longer 
@@ -58,7 +59,7 @@ seen as incompatible. In practice, this means that:</p>
 <h2 id="L77">Table of Contents</h2>
 
 <ul><li><a href="#L255">Introduction</a><ul><li><a href="#L261">What is OBFL?</a></li><li><a href="#L265">Why is OBFL Necessary?</a></li><li><a href="#L279">Scope Limitations</a></li></ul></li><li><a href="#L287">Definitions</a><ul><li><a href="#L295">Terminology</a></li><li><a href="#L302">General Terms</a></li><li><a href="#L425">Axes and Node Types</a></li><li><a href="#L449">Relationship to Other Specifications</a></li></ul></li><li><a href="#L453">Definition of OBFL</a><ul><li><a href="#L459">Document Conformance </a></li><li><a href="#L493">Using OBFL with Other
-Namespaces</a></li><li><a href="#L501">Internet Media Type and File Extension</a></li></ul></li><li><a href="#L502">White Space Processing</a><ul><li><a href="#L632">Problems with White Space</a></li><li><a href="#L657">Implications of Incorrect White Space</a></li><li><a href="#L671">Default White Space Processing</a></li></ul></li><li><a href="#L5021">Pagination</a><ul><li><a href="#L5022">Main Flow</a></li><li><a href="#L5025">Auxiliary Flows</a></li><li><a href="#L5023">Simplex</a></li><li><a href="#L5024">Duplex</a></li></ul></li><li><a href="#N66182">Page Model</a><ul><li><a href="#N66192">Recto (front side)</a></li><li><a href="#N66286">Verso (back side)</a></li></ul></li><li><a href="#L558">Elements</a><ul><li><a href="#L856">The Root Element</a><ul><li><a href="#L565">obfl</a></li></ul></li><li><a href="#L949">Document Metadata</a><ul><li><a href="#L587">meta</a></li></ul></li><li><a href="#L967">Page Templates</a><ul><li><a href="#L5871">layout-master</a></li><li><a href="#L608">template</a></li><li><a href="#L608-2">default-template</a></li><li><a href="#L647">page-area</a></li><li><a href="#L20904">fallback</a></li><li><a href="#L20925">rename</a></li><li><a href="#L629">before</a></li><li><a href="#L6291">after</a></li><li><a href="#L62911">header</a></li><li><a href="#L6471">footer</a></li><li><a href="#L1296">margin-region</a></li><li><a href="#L1328">indicators</a></li><li><a href="#L1329">marker-indicator</a><ul><li><a href="#L1365">Example</a></li></ul></li><li><a href="#L665">field</a></li><li><a href="#L683">marker-reference</a><ul><li><a href="#L1333">start-offset</a></li></ul></li><li><a href="#L696">string</a></li><li><a href="#L709">current-page</a></li></ul></li><li><a href="#L1631">Sequences</a><ul><li><a href="#L906">sequence</a></li><li><a href="#L11470">dynamic-sequence</a></li></ul></li><li><a href="#L1765">Blocks</a><ul><li><a href="#L1023">block</a></li></ul></li><li><a href="#L1894">Inline Content</a><ul><li><a href="#L722">evaluate</a><ul><li><a href="#L1033">Example</a></li></ul></li><li><a href="#L1207">leader</a></li><li><a href="#L1353">marker</a></li><li><a href="#L924">anchor</a></li><li><a href="#L1438">br</a></li><li><a href="#L836">page-number</a></li><li><a href="#L840">external-reference</a><ul><li><a href="#L1331">Example</a></li></ul></li><li><a href="#L849">span</a></li><li><a href="#L8491">style</a></li></ul></li><li><a href="#L2227">Tabular Data</a><ul><li><a href="#L2229">table</a><ul><li><a href="#table-margins">Borders in and Around Tables</a></li></ul></li><li><a href="#thead">thead</a></li><li><a href="#tbody">tbody</a></li><li><a href="#L2253">tr</a></li><li><a href="#L2277">td</a></li></ul></li><li><a href="#L2167">Table of Contents</a><ul><li><a href="#L735">table-of-contents</a></li><li><a href="#L735">toc-block</a></li><li><a href="#L1105">toc-entry</a></li><li><a href="#L1105">toc-entry-on-resumed</a></li><li><a href="#L9241">toc-sequence</a></li><li><a href="#L9514">on-toc-start</a></li><li><a href="#L969">on-volume-start</a></li><li><a href="#L987">on-volume-end</a></li><li><a href="#L1005">on-toc-end</a></li></ul></li><li><a href="#L2433">Volume Templates</a><ul><li><a href="#L84911">volume-template</a></li><li><a href="#L870">pre-content</a></li><li><a href="#L888">post-content</a></li><li><a href="#L8701">volume-transition</a><ul><li><a href="#L22731">Example</a></li></ul></li><li><a href="#L8702">block-interrupted</a></li><li><a href="#L8703">block-resumed</a></li><li><a href="#L8704">sequence-interrupted</a></li><li><a href="#L8705">sequence-resumed</a></li><li><a href="#N69738">any-interrupted</a></li><li><a href="#N69771">any-resumed</a></li></ul></li><li><a href="#L2529">Achored Data</a><ul><li><a href="#L1194">collection</a></li><li><a href="#L1210">item</a></li><li><a href="#L9242">list-of-references</a></li><li><a href="#L951">on-collection-start</a></li><li><a href="#L9511">on-page-start</a></li><li><a href="#L9512">on-page-end</a></li><li><a href="#L9513">on-collection-end</a></li></ul></li><li><a href="#L2715">Dynamic Source Data Processing</a><ul><li><a href="#L2248">xml-data</a><ul><li><a href="#L2273">Example</a></li></ul></li><li><a href="#L2724">renderer</a></li><li><a href="#L2749">rendering-scenario</a><ul><li><a href="#L2793">Example</a></li></ul></li><li><a href="#N70291">parameter</a></li><li><a href="#L2690">xml-processor</a><ul><li><a href="#L2720">Example</a></li></ul></li><li><a href="#L1607">xml-processor-result</a><ul><li><a href="#L2721">Example</a></li></ul></li><li><a href="#L432">file-reference</a><ul><li><a href="#L27214">Example</a></li></ul></li></ul></li></ul></li><li><a href="#L1608">Attribute Definitions</a><ul><li><a href="#L21839">hyphenate</a><ul><li><a href="#L21851">Example</a></li></ul></li><li><a href="#pagenumbercounter">page-number-counter</a></li><li><a href="#rowspacing">row-spacing</a></li><li><a href="#L2462">translate</a><ul><li><a href="#L2475">pre-translated</a></li></ul></li></ul></li><li><a href="#L16081">Attribute Groups</a><ul><li><a href="#block-atts">Block</a><ul><li><a href="#L2519">Collapsing Margins</a></li><li><a href="#L2536">Example</a></li></ul></li><li><a href="#borders">Borders</a></li><li><a href="#margin-atts">Margin</a></li><li><a href="#padding-atts">Padding</a></li></ul></li><li><a href="#L756">Rule Sets</a><ul><li><a href="#L763">Relax NG Rule Set</a></li><li><a href="#L774">Other Rule Sets</a></li></ul></li><li><a href="#L784">References</a><ul><li><a href="#L786">Normative References</a></li><li><a href="#L881">Informative References</a></li></ul></li></ul>
+Namespaces</a></li><li><a href="#L501">Internet Media Type and File Extension</a></li></ul></li><li><a href="#L502">White Space Processing</a><ul><li><a href="#L632">Problems with White Space</a></li><li><a href="#L657">Implications of Incorrect White Space</a></li><li><a href="#L671">Default White Space Processing</a></li></ul></li><li><a href="#L5021">Pagination</a><ul><li><a href="#L5022">Main Flow</a></li><li><a href="#L5025">Auxiliary Flows</a></li><li><a href="#L5023">Simplex</a></li><li><a href="#L5024">Duplex</a></li></ul></li><li><a href="#N66185">Page Model</a><ul><li><a href="#N66195">Recto (front side)</a></li><li><a href="#N66289">Verso (back side)</a></li></ul></li><li><a href="#L558">Elements</a><ul><li><a href="#L856">The Root Element</a><ul><li><a href="#L565">obfl</a></li></ul></li><li><a href="#L949">Document Metadata</a><ul><li><a href="#L587">meta</a></li></ul></li><li><a href="#L967">Page Templates</a><ul><li><a href="#L5871">layout-master</a></li><li><a href="#L608">template</a></li><li><a href="#L608-2">default-template</a></li><li><a href="#L647">page-area</a></li><li><a href="#L20904">fallback</a></li><li><a href="#L20925">rename</a></li><li><a href="#L629">before</a></li><li><a href="#L6291">after</a></li><li><a href="#L62911">header</a></li><li><a href="#L6471">footer</a></li><li><a href="#L1296">margin-region</a></li><li><a href="#L1328">indicators</a></li><li><a href="#L1329">marker-indicator</a><ul><li><a href="#L1365">Example</a></li></ul></li><li><a href="#L665">field</a></li><li><a href="#L683">marker-reference</a><ul><li><a href="#L1333">start-offset</a></li></ul></li><li><a href="#L696">string</a></li><li><a href="#L709">current-page</a></li></ul></li><li><a href="#L1631">Sequences</a><ul><li><a href="#L906">sequence</a></li><li><a href="#L11470">dynamic-sequence</a></li></ul></li><li><a href="#L1765">Blocks</a><ul><li><a href="#L1023">block</a></li></ul></li><li><a href="#L1894">Inline Content</a><ul><li><a href="#L722">evaluate</a><ul><li><a href="#L1033">Example</a></li></ul></li><li><a href="#L1207">leader</a></li><li><a href="#L1353">marker</a></li><li><a href="#L924">anchor</a></li><li><a href="#L1438">br</a></li><li><a href="#L836">page-number</a></li><li><a href="#L840">external-reference</a><ul><li><a href="#L1331">Example</a></li></ul></li><li><a href="#L849">span</a></li><li><a href="#L8491">style</a></li></ul></li><li><a href="#L2227">Tabular Data</a><ul><li><a href="#L2229">table</a><ul><li><a href="#table-margins">Borders in and Around Tables</a></li></ul></li><li><a href="#thead">thead</a></li><li><a href="#tbody">tbody</a></li><li><a href="#L2253">tr</a></li><li><a href="#L2277">td</a></li></ul></li><li><a href="#L2167">Table of Contents</a><ul><li><a href="#L735">table-of-contents</a></li><li><a href="#L735">toc-block</a></li><li><a href="#L1105">toc-entry</a></li><li><a href="#L1105">toc-entry-on-resumed</a></li><li><a href="#L9241">toc-sequence</a></li><li><a href="#L9514">on-toc-start</a></li><li><a href="#L969">on-volume-start</a></li><li><a href="#L987">on-volume-end</a></li><li><a href="#L1005">on-toc-end</a></li></ul></li><li><a href="#L2433">Volume Templates</a><ul><li><a href="#L84911">volume-template</a></li><li><a href="#L870">pre-content</a></li><li><a href="#L888">post-content</a></li><li><a href="#L8701">volume-transition</a><ul><li><a href="#L22731">Example</a></li></ul></li><li><a href="#L8702">block-interrupted</a></li><li><a href="#L8703">block-resumed</a></li><li><a href="#L8704">sequence-interrupted</a></li><li><a href="#L8705">sequence-resumed</a></li><li><a href="#N69980">any-interrupted</a></li><li><a href="#N70013">any-resumed</a></li></ul></li><li><a href="#L2529">Achored Data</a><ul><li><a href="#L1194">collection</a></li><li><a href="#L1210">item</a></li><li><a href="#L9242">list-of-references</a></li><li><a href="#L951">on-collection-start</a></li><li><a href="#L9511">on-page-start</a></li><li><a href="#L9512">on-page-end</a></li><li><a href="#L9513">on-collection-end</a></li></ul></li><li><a href="#L2715">Dynamic Source Data Processing</a><ul><li><a href="#L2248">xml-data</a><ul><li><a href="#L2273">Example</a></li></ul></li><li><a href="#L2724">renderer</a></li><li><a href="#L2749">rendering-scenario</a><ul><li><a href="#L2793">Example</a></li></ul></li><li><a href="#N70608">parameter</a></li><li><a href="#L2690">xml-processor</a><ul><li><a href="#L2720">Example</a></li></ul></li><li><a href="#L1607">xml-processor-result</a><ul><li><a href="#L2721">Example</a></li></ul></li><li><a href="#L432">file-reference</a><ul><li><a href="#L27214">Example</a></li></ul></li></ul></li></ul></li><li><a href="#L1608">Attribute Definitions</a><ul><li><a href="#L21839">hyphenate</a><ul><li><a href="#L21851">Example</a></li></ul></li><li><a href="#pagenumbercounter">page-number-counter</a></li><li><a href="#rowspacing">row-spacing</a></li><li><a href="#L2462">translate</a><ul><li><a href="#L2475">pre-translated</a></li></ul></li></ul></li><li><a href="#L16081">Attribute Groups</a><ul><li><a href="#block-atts">Block</a><ul><li><a href="#L2519">Collapsing Margins</a></li><li><a href="#L2536">Example</a></li></ul></li><li><a href="#borders">Borders</a></li><li><a href="#margin-atts">Margin</a></li><li><a href="#padding-atts">Padding</a></li></ul></li><li><a href="#L756">Rule Sets</a><ul><li><a href="#L763">Relax NG Rule Set</a></li><li><a href="#L774">Other Rule Sets</a></li></ul></li><li><a href="#L784">References</a><ul><li><a href="#L786">Normative References</a></li><li><a href="#L881">Informative References</a></li></ul></li></ul>
 
 <h2 id="L255">Introduction</h2>
 
@@ -338,13 +339,13 @@ The back side of sheets are neither counted nor paginated.</p>
 However, if the last sheet of a duplex sequence only has content on the front side, 
 the back side is counted, but not <em>paginated</em>.</p>
 
-<h2 id="N66182">Page Model</h2>
+<h2 id="N66185">Page Model</h2>
 
 <p><strong>This section is normative.</strong></p>
 
 <p>The page model describes the relationships between regions on a page.</p>
 
-<h3 id="N66192">Recto (front side)</h3>
+<h3 id="N66195">Recto (front side)</h3>
 
 <p>The following applies on the front side of a sheet or when only one side of the sheet is used.</p>
 
@@ -378,7 +379,7 @@ the text body area so that the margin area can be used as well.</p>
 
 <p>A = Margin region if text flow is combined with header/footer and there is a margin region, otherwise this area is available to header/footer.</p>
 
-<h3 id="N66286">Verso (back side)</h3>
+<h3 id="N66289">Verso (back side)</h3>
 <p>The only difference between the recto and the verso side, is that the outer and inner margins have switched places.</p>
 
 <h2 id="L558">Elements</h2>
@@ -471,6 +472,8 @@ element is allowed, however a stricter set of elements might be more useful.</p>
 where the layout-master is applied. It contains page template information, such
 as the width and height of pages.</p>
 
+<ins id="N66482" datetime="20200608T19:00:00">Variable names are fixed.</ins>
+
 <div class="sidebar markup">
 <dl>
   <dt>Usage</dt>
@@ -489,9 +492,6 @@ as the width and height of pages.</p>
           <dd>Default is 0.</dd>
         <dt>page-height [required]</dt>
           <dd>The page height, in row heights.</dd>
-        <dt>page-number-variable [optional]</dt>
-          <dd>A name for the variable to be used in expression evaluation.</dd>
-          <dd>Default is ???.</dd>
         <dt>page-width [required]</dt>
           <dd>The page width, in characters.</dd>
         <dt>row-spacing [optional]</dt>
@@ -532,6 +532,14 @@ text flow area is reduced by the combined width of the margin-regions.</p>
     <dd><dl>
         <dt>use-when [required]</dt>
           <dd>An expression.</dd>
+      </dl>
+    </dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>These variables can be used in the use-when condition:</p>
+      <dl>
+        <dt>page</dt>
+          <dd>The current page number.</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -1177,6 +1185,60 @@ information.</p>
           <dd class="markup note">This attribute is only available in the context of a field element.</dd>
       </dl>
     </dd>
+  <dt>Variables</dt>
+    <dd class="markup note">For readability, the examples below have plain text
+      instead of braille.</dd>
+    <dd>
+      <p>These are the commonly available variables for use in the <a href="obfl-evaluation-language.html">OBFL Evaluation Language</a>
+        expression:</p>
+      <dl>
+        <dt>page</dt>
+          <dd>The variable holding the current page number. For instance,
+            <code>This is page &lt;evaluate expression="$page"/&gt;</code>.</dd>
+        <dt>volume</dt>
+          <dd>The variable holding the current volume number. For instance,
+            <code>This is volume &lt;evaluate
+            expression="$volume"/&gt;</code>.</dd>
+        <dt>volumes</dt>
+          <dd>The variable holding the total number of volumes. For instance,
+            <code>This book has &lt;evaluate expression="$volumes"/&gt;
+              volumes</code>.</dd>
+        <dt>sheets-in-document</dt>
+          <dd>The variable holding the number of sheets in this document. For
+            instance, <code>This document has &lt;evaluate
+            expression="$sheets-in-document"/&gt; sheets</code>.</dd>
+        <dt>sheets-in-volume</dt>
+          <dd>The variable holding the number of sheets of the current volume.
+            For instance, <code>This volume has &lt;evaluate
+            expression="$sheets-in-volume"/&gt; sheets</code>.</dd>
+      </dl>
+    </dd>
+    <dd>
+      <p class="markup">This variable is available in descendant elements of
+        on-volume-start and on-volume-end:</p>
+      <dl>
+        <dt>started-volume-number</dt>
+          <dd>The volume number of the volume that was started or ended, 
+            respectively.</dd>
+      </dl>
+    </dd>
+    <dd>
+      <p class="markup">This variable is available in descendant elements of
+        on-page-start and on-page-end:</p>
+      <dl>
+        <dt>started-page-number</dt>
+          <dd>The page number of the page that was started or ended,
+            respectively.</dd>
+      </dl>
+    </dd>
+    <dd>
+      <p class="markup">This variable is available in descendant elements of
+        toc-entry-on-resumed:</p>
+      <dl>
+        <dt>started-volume-first-content-page</dt>
+          <dd>The first page number of the content of the started volume.</dd>
+      </dl>
+    </dd>
   <dt>Content Model</dt>
     <dd>Empty.</dd>
 </dl>
@@ -1220,7 +1282,7 @@ the current row.</p>
 <h4 id="L1353" class="include">marker</h4>
 
 <p>The marker element provides locations for classes of values that may be
-refered to in headers and footers.</p>
+referred to in headers and footers.</p>
 
 <div class="sidebar markup">
 <dl>
@@ -1299,7 +1361,7 @@ element.</p>
 
 <h4 id="L840" class="include">external-reference</h4>
 
-<ins id="N68244" datetime="20200429T15:00:00">The external-reference element can be attached to any position in the text
+<ins id="N68373" datetime="20200429T15:00:00">The external-reference element can be attached to any position in the text
   within the block to send information through the implementation from obfl to pef.</ins>
 
 <p>With the external-reference element custom annotations can be attached to any position in the text within
@@ -1580,7 +1642,7 @@ table spans.</p>
 Note that this element specifies formatting of data in a table of contents, it
 does not by it self specify that a table of contents should be inserted.</p>
 
-<ins id="N68857" datetime="20191202T11:00:00">The table of contents is a hierarchy of toc-block
+<ins id="N68986" datetime="20191202T11:00:00">The table of contents is a hierarchy of toc-block
 elements with toc-entry elements as inline content.</ins>
 
 <div class="sidebar markup">
@@ -1623,7 +1685,7 @@ conditional container of content. In a volume-ranged toc-sequence, the content
 will only be rendered if the block the toc-entry refers to starts in the current
 volume. In a document-ranged toc-sequence, the content will always be rendered.</p>
 
-<ins id="N68941" datetime="20191202T11:00:00">The toc-entry element has only inline content.</ins>
+<ins id="N69070" datetime="20191202T11:00:00">The toc-entry element has only inline content.</ins>
 
 <div class="sidebar markup">
 <dl>
@@ -1672,12 +1734,12 @@ more than once. The range consists of two block ids (the latter is optional).</p
       </dl>
     </dd>
   <dt>Variables</dt>
-    <dd><dl>
+    <dd>
+      <p>This variable can be used in a descendant evaluate expression:</p>
+      <dl>
         <dt>started-volume-first-content-page</dt>
           <dd>The variable holding the first page number of the content of the
-            started volume. It can be used in an evaluate expression, e.g.
-            <code>&lt;evaluate
-            expression="$started-volume-first-content-page"/&gt;</code>.</dd>
+            started volume.</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -1757,6 +1819,14 @@ data.</p>
           Language</a></dd>
       </dl>
     </dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>This variable can be used in the use-when condition:</p>
+      <dl>
+        <dt>volumes</dt>
+          <dd>The total number of volumes.</dd>
+      </dl>
+    </dd>
   <dt>Content Model</dt>
     <dd>block [1 or more]</dd>
 </dl>
@@ -1778,6 +1848,21 @@ document range toc-sequences and list-of-references.</p>
           <dd>a condition for inserting the contents, expressed using the <a href="obfl-evaluation-language.html">OBFL Evaluation
           Language</a></dd>
           <dd class="markup note">This attribute is only available in the context of a toc-sequence.</dd>
+      </dl>
+    </dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>These variables can be used in the use-when condition:</p>
+      <dl>
+        <dt>started-volume-number</dt>
+          <dd>The volume number of the volume that was started.</dd>
+        <dt>volumes</dt>
+          <dd>The total number of volumes.</dd>
+      </dl>
+      <p>This variable can be used in a descendant evaluate expression:</p>
+      <dl>
+        <dt>started-volume-number</dt>
+          <dd>The variable holding the number of the started volume.</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -1803,6 +1888,21 @@ document range toc-sequences and list-of-references.</p>
           <dd class="markup note">This attribute is only available in the context of a toc-sequence.</dd>
       </dl>
     </dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>These variables can be used in the use-when condition:</p>
+      <dl>
+        <dt>started-volume-number</dt>
+          <dd>The volume number of the volume that was ended.</dd>
+        <dt>volumes</dt>
+          <dd>The total number of volumes.</dd>
+      </dl>
+      <p>This variable can be used in a descendant evaluate expression:</p>
+      <dl>
+        <dt>started-volume-number</dt>
+          <dd>The variable holding the number of the volume that was ended.</dd>
+      </dl>
+    </dd>
   <dt>Content Model</dt>
     <dd>block [1 or more]</dd>
 </dl>
@@ -1824,6 +1924,14 @@ data.</p>
           Language</a></dd>
       </dl>
     </dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>This variable can be used in the use-when condition:</p>
+      <dl>
+        <dt>volumes</dt>
+          <dd>The total number of volumes.</dd>
+      </dl>
+    </dd>
   <dt>Content Model</dt>
     <dd>block [1 or more]</dd>
 </dl>
@@ -1839,22 +1947,14 @@ sequences that can be used to create static contents such as information about
 the author and title of the book, there is a special sequence called
 toc-sequence.</p>
 
+<ins id="N69620" datetime="20200608T19:00:00">Variable names are fixed.</ins>
+
 <div class="sidebar markup">
 <dl>
   <dt>Usage</dt>
     <dd>obfl</dd>
   <dt>Attributes</dt>
     <dd><dl>
-        <dt>volume-count-variable [optional]</dt>
-          <dd>Definition of the name of the variable holding the number of
-            volumes. It can be used in an expression, e.g. <code>(= $volumes
-            1)</code>.</dd>
-          <dd>Default is 'volumes'.</dd>
-        <dt>volume-number-variable [optional]</dt>
-          <dd>Definition of the name of the variable holding the current volume
-            number. It can be used in an expression, e.g. <code>(= $volume
-            1)</code>.</dd>
-          <dd>Default is 'volume'.</dd>
         <dt>use-when [optional]</dt>
           <dd>A condition for applying the volume-template, expressed using the
             <a href="obfl-evaluation-language.html">OBFL Evaluation
@@ -1862,6 +1962,16 @@ toc-sequence.</p>
         <dt>sheets-in-volume-max [required]</dt>
           <dd>Defines the maximum number of sheets in a volume using this
             volume-template.</dd>
+      </dl>
+    </dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>These variables can be used in the use-when condition:</p>
+      <dl>
+        <dt>volume</dt>
+          <dd>The current volume number.</dd>
+        <dt>volumes</dt>
+          <dd>The total number of volumes.</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -2033,7 +2143,7 @@ volume's body of pages.</p>
     </dl>
   </div>
 
-  <h4 id="N69738" class="include">any-interrupted</h4>
+  <h4 id="N69980" class="include">any-interrupted</h4>
   <div class="note">
     <p>This feature is incubating (2018-09-24). This means that the feature is
       currently a work-in-progress and may change or disappear at any time.</p>
@@ -2050,7 +2160,7 @@ volume's body of pages.</p>
     </dl>
   </div>
   
-  <h4 id="N69771" class="include">any-resumed</h4>
+  <h4 id="N70013" class="include">any-resumed</h4>
   <div class="note">
     <p>This feature is incubating (2018-09-24). This means that the feature is
       currently a work-in-progress and may change or disappear at any time.</p>
@@ -2172,6 +2282,14 @@ collection items on a page.</p>
     <dd>list-of-references</dd>
   <dt>Attributes</dt>
     <dd>None</dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>This variable can be used in a descendant evaluate expression:</p>
+      <dl>
+        <dt>started-page-number</dt>
+          <dd>The variable holding the number of the started page.</dd>
+      </dl>
+    </dd>
   <dt>Content Model</dt>
     <dd>block [1 or more]</dd>
 </dl>
@@ -2188,6 +2306,14 @@ collection items on a page.</p>
     <dd>list-of-references</dd>
   <dt>Attributes</dt>
     <dd>None</dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>This variable can be used in a descendant evaluate expression:</p>
+      <dl>
+        <dt>started-page-number</dt>
+          <dd>The variable holding the number of the page that was ended.</dd>
+      </dl>
+    </dd>
   <dt>Content Model</dt>
     <dd>block [1 or more]</dd>
 </dl>
@@ -2298,6 +2424,21 @@ applied to a given xml-data.</p>
           </dd>
       </dl>
     </dd>
+  <dt>Variables</dt>
+    <dd>
+      <p>These are the available variables for use in the cost expression:</p>
+      <dl>
+        <dt>min-block-width</dt>
+          <dd>The variable holding the minimum block width. For instance,
+            <code>cost="(- 30 $min-block-width)"</code>.</dd>
+        <dt>forced-break-count</dt>
+          <dd>The variable holding the number of forced breaks. For instance,
+            <code>cost="(* 10 $forced-break-count)"</code>.</dd>
+        <dt>total-height</dt>
+          <dd>The variable holding the total height. For instance,
+            <code>cost="(+ 1 $total-height)"</code>.</dd>
+      </dl>
+    </dd>
   <dt>Content Model</dt>
     <dd>parameter [0 or more]</dd>
 </dl>
@@ -2314,7 +2455,7 @@ applied to a given xml-data.</p>
 </pre>
 </div>
 
-<h4 id="N70291" class="include">parameter</h4>
+<h4 id="N70608" class="include">parameter</h4>
 
 <p>Defines a parameter for a rendering-scenario.</p>
 

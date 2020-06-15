@@ -420,7 +420,6 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="page-number-variable"/>
     <xs:attributeGroup ref="obfl:border-atts"/>
   </xs:attributeGroup>
   <xs:element name="template">
@@ -699,8 +698,6 @@
   </xs:element>
   <xs:attributeGroup name="attlist-volume-template">
     <xs:attribute name="use-when"/>
-    <xs:attribute name="volume-number-variable"/>
-    <xs:attribute name="volume-count-variable"/>
     <xs:attribute name="sheets-in-volume-max" use="required"/>
   </xs:attributeGroup>
   <xs:element name="pre-content">
