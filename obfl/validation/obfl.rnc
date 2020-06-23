@@ -150,12 +150,19 @@ blockAtts =
   block-atts
 # master, name of master to use for this sequence
 # initial-page-number, number of first page in the sequence
-sequenceAtts =
+sequenceAtts-except-break-before-after =
   attribute master { xsd:IDREF },
   attribute initial-page-number { text }?,
-  attribute break-before { "auto" | "volume" }?,
   attribute page-number-counter { xsd:NMTOKEN }?,
   textAtts
+sequenceAtts =
+  sequenceAtts-except-break-before-after,
+  attribute break-before { "auto" | "page" | "sheet" | "volume" }?,
+  attribute break-after { "auto" | "page" | "sheet" | "volume" }?
+preAndPostContentSequenceAtts =
+  sequenceAtts-except-break-before-after,
+  attribute break-before { "auto" | "page" | "sheet" }?,
+  attribute break-after { "auto" | "page" | "sheet" }?
 # Document root
 obfl =
   element obfl {
@@ -302,12 +309,14 @@ attlist-volume-template &=
   attribute sheets-in-volume-max { text }
 pre-content =
   element pre-content {
-    attlist-pre-content, (sequence | dynamic-sequence | toc-sequence)*
+    attlist-pre-content,
+    (sequence-in-pre-post-content | dynamic-sequence | toc-sequence)*
   }
 attlist-pre-content &= empty
 post-content =
   element post-content {
-    attlist-post-content, (sequence | dynamic-sequence | toc-sequence)*
+    attlist-post-content,
+    (sequence-in-pre-post-content | dynamic-sequence | toc-sequence)*
   }
 attlist-post-content &= empty
 volume-transition =
@@ -338,7 +347,7 @@ toc-sequence =
 attlist-toc-sequence &=
   attribute toc { xsd:IDREF },
   attribute range { "document" | "volume" },
-  sequenceAtts
+  preAndPostContentSequenceAtts
 on-toc-start = element on-toc-start { attlist-on-toc-start, block+ }
 attlist-on-toc-start &= attribute use-when { text }?
 on-volume-start =
@@ -378,11 +387,16 @@ dynamic-sequence =
   element dynamic-sequence {
     attlist-dynamic-sequence, (block | list-of-references)+
   }
-attlist-dynamic-sequence &= sequenceAtts
+attlist-dynamic-sequence &= preAndPostContentSequenceAtts
 # A sequence of blocks
 sequence =
   element sequence { attlist-sequence, (block | table | xml-data)+ }
 attlist-sequence &= sequenceAtts
+sequence-in-pre-post-content =
+  element sequence {
+    attlist-sequence-in-pre-post-content, (block | table | xml-data)+
+  }
+attlist-sequence-in-pre-post-content &= preAndPostContentSequenceAtts
 # fallback-scope (all|page) #IMPLIED
 page-area =
   element page-area { attlist-page-area, fallback?, before?, after? }

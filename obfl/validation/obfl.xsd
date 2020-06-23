@@ -321,19 +321,55 @@
     master, name of master to use for this sequence
     initial-page-number, number of first page in the sequence
   -->
-  <xs:attributeGroup name="sequenceAtts">
+  <xs:attributeGroup name="sequenceAtts-except-break-before-after">
     <xs:attribute name="master" use="required" type="xs:IDREF"/>
     <xs:attribute name="initial-page-number"/>
+    <xs:attribute name="page-number-counter" type="xs:NMTOKEN"/>
+    <xs:attributeGroup ref="obfl:textAtts"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="sequenceAtts">
+    <xs:attributeGroup ref="obfl:sequenceAtts-except-break-before-after"/>
     <xs:attribute name="break-before">
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="auto"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="sheet"/>
           <xs:enumeration value="volume"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="page-number-counter" type="xs:NMTOKEN"/>
-    <xs:attributeGroup ref="obfl:textAtts"/>
+    <xs:attribute name="break-after">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="sheet"/>
+          <xs:enumeration value="volume"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="preAndPostContentSequenceAtts">
+    <xs:attributeGroup ref="obfl:sequenceAtts-except-break-before-after"/>
+    <xs:attribute name="break-before">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="sheet"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="break-after">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="sheet"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <!-- Document root -->
   <xs:element name="obfl">
@@ -703,7 +739,7 @@
   <xs:element name="pre-content">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="obfl:sequence"/>
+        <xs:group ref="obfl:sequence-in-pre-post-content"/>
         <xs:group ref="obfl:dynamic-sequence"/>
         <xs:group ref="obfl:toc-sequence"/>
       </xs:choice>
@@ -712,7 +748,7 @@
   <xs:element name="post-content">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="obfl:sequence"/>
+        <xs:group ref="obfl:sequence-in-pre-post-content"/>
         <xs:group ref="obfl:dynamic-sequence"/>
         <xs:group ref="obfl:toc-sequence"/>
       </xs:choice>
@@ -796,7 +832,7 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attributeGroup ref="obfl:sequenceAtts"/>
+    <xs:attributeGroup ref="obfl:preAndPostContentSequenceAtts"/>
   </xs:attributeGroup>
   <xs:element name="on-toc-start">
     <xs:complexType>
@@ -922,7 +958,7 @@
     </xs:sequence>
   </xs:group>
   <xs:attributeGroup name="attlist-dynamic-sequence">
-    <xs:attributeGroup ref="obfl:sequenceAtts"/>
+    <xs:attributeGroup ref="obfl:preAndPostContentSequenceAtts"/>
   </xs:attributeGroup>
   <!-- A sequence of blocks -->
   <xs:group name="sequence">
@@ -941,6 +977,23 @@
   </xs:group>
   <xs:attributeGroup name="attlist-sequence">
     <xs:attributeGroup ref="obfl:sequenceAtts"/>
+  </xs:attributeGroup>
+  <xs:group name="sequence-in-pre-post-content">
+    <xs:sequence>
+      <xs:element name="sequence">
+        <xs:complexType>
+          <xs:choice maxOccurs="unbounded">
+            <xs:group ref="obfl:block"/>
+            <xs:element ref="obfl:table"/>
+            <xs:group ref="obfl:xml-data"/>
+          </xs:choice>
+          <xs:attributeGroup ref="obfl:attlist-sequence-in-pre-post-content"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="attlist-sequence-in-pre-post-content">
+    <xs:attributeGroup ref="obfl:preAndPostContentSequenceAtts"/>
   </xs:attributeGroup>
   <!-- fallback-scope (all|page) #IMPLIED -->
   <xs:group name="page-area">
