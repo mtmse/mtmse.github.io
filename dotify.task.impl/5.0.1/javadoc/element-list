@@ -1,0 +1,8 @@
+org.daisy.dotify.tasks.impl
+org.daisy.dotify.tasks.impl.identity
+org.daisy.dotify.tasks.impl.input
+org.daisy.dotify.tasks.impl.input.epub
+org.daisy.dotify.tasks.impl.input.obfl
+org.daisy.dotify.tasks.impl.input.text
+org.daisy.dotify.tasks.impl.input.xml
+org.daisy.dotify.tasks.impl.validity
