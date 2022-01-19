@@ -11,6 +11,7 @@
         <xs:group ref="obfl:page-number"/>
         <xs:element ref="obfl:external-reference"/>
         <xs:group ref="obfl:marker-reference"/>
+        <xs:group ref="obfl:compound-marker-reference"/>
         <xs:element ref="obfl:span"/>
         <xs:element ref="obfl:style"/>
       </xs:choice>
@@ -539,6 +540,7 @@
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="obfl:marker-reference-in-field"/>
+        <xs:group ref="obfl:compound-marker-reference-in-field"/>
         <xs:element ref="obfl:string"/>
         <xs:element ref="obfl:current-page"/>
         <xs:group ref="obfl:evaluate-in-field"/>
@@ -631,6 +633,24 @@
     <xs:attributeGroup ref="obfl:attlist-marker-reference"/>
     <xs:attribute name="text-style" type="xs:NMTOKEN"/>
   </xs:attributeGroup>
+  <xs:group name="compound-marker-reference">
+    <xs:sequence>
+      <xs:element name="compound-marker-reference">
+        <xs:complexType>
+          <xs:group maxOccurs="unbounded" ref="obfl:marker-reference"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="compound-marker-reference-in-field">
+    <xs:sequence>
+      <xs:element name="compound-marker-reference">
+        <xs:complexType>
+          <xs:group maxOccurs="unbounded" ref="obfl:marker-reference-in-field"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
   <xs:element name="string">
     <xs:complexType>
       <xs:attributeGroup ref="obfl:attlist-string"/>
@@ -1104,6 +1124,7 @@
   </xs:group>
   <xs:attributeGroup name="attlist-block">
     <xs:attributeGroup ref="obfl:blockAtts"/>
+    <xs:attribute name="display-when"/>
   </xs:attributeGroup>
   <xs:group name="item">
     <xs:sequence>

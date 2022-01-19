@@ -10,6 +10,7 @@ blockContents =
   | page-number
   | external-reference
   | marker-reference
+  | compound-marker-reference
   | span
   | style
 \namespace = empty
@@ -230,6 +231,7 @@ field =
   element field {
     attlist-field,
     (marker-reference-in-field
+     | compound-marker-reference-in-field
      | \string
      | current-page
      | evaluate-in-field)*
@@ -269,6 +271,10 @@ attlist-marker-reference &=
 attlist-marker-reference-in-field &=
   attlist-marker-reference,
   attribute text-style { xsd:NMTOKEN }?
+compound-marker-reference =
+  element compound-marker-reference { marker-reference+ }
+compound-marker-reference-in-field =
+  element compound-marker-reference { marker-reference-in-field+ }
 \string = element string { attlist-string, empty }
 attlist-string &=
   attribute value { text },
@@ -421,7 +427,9 @@ block =
   element block {
     attlist-block, (blockContents | anchor | block | table | xml-data)*
   }
-attlist-block &= blockAtts
+attlist-block &=
+  blockAtts,
+  attribute display-when { text }?
 item = element item { attlist-item, (blockContents | block)* }
 attlist-item &=
   attribute id { xsd:ID },
