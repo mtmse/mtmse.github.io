@@ -15,13 +15,26 @@ blockContents =
   | style
 \namespace = empty
 row-spacing = attribute row-spacing { text }?
+translate =
+  attribute translate {
+    ""
+    | "pre-translated"
+    | "uncontracted"
+    | "contracted"
+    | xsd:string { pattern = "grade:[1-9]+(\.[0-9]+)?" }
+    | "6-dot"
+    | "8-dot"
+    | xsd:token {
+        pattern =
+          "(contracted|uncontracted)(/grade:[1-9]+(\.[0-9]+)?)?(/([68]-dot))?"
+      }
+    | xsd:token { pattern = "grade:[1-9]+(\.[0-9]+)?(/([68]-dot))?" }
+  }?
 # hyphenate, true to hyphenate, false otherwise
 textAtts =
   attribute xml:lang { xsd:NMTOKEN }?,
   attribute hyphenate { "true" | "false" | "" }?,
-  attribute translate {
-    "" | "pre-translated" | "grade0" | "grade1" | "grade2" | "grade3"
-  }?
+  translate
 name-id = attribute name { xsd:ID }
 # none, no border (default)
 # solid, a solid line
@@ -184,9 +197,7 @@ attlist-obfl &=
   attribute version { "2011-1" },
   attribute xml:lang { xsd:NMTOKEN },
   attribute hyphenate { "true" | "false" | "" }?,
-  attribute translate {
-    "" | "pre-translated" | "grade0" | "grade1" | "grade2" | "grade3"
-  }?
+  translate
 #
 meta = element meta { attlist-meta, any_element_except_obfl* }
 attlist-meta &= empty

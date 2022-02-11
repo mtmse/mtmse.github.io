@@ -6,7 +6,7 @@
   <meta name="dc:identifier" content="" />
   <meta name="dc:Title" content="OBFL Specification" />
   <meta name="dc:Language" content="en" />
-  <meta name="dc:Date" content="2022-01-19T06:43+01:00" />
+  <meta name="dc:Date" content="2022-02-11T13:24+01:00" />
   <link rel="stylesheet" href="styles/w3c-unofficial.css" type="text/css" />
   <link rel="stylesheet" href="styles/style.css" type="text/css" />
 </head>
@@ -15,7 +15,7 @@
 <h1 id="N65581">OBFL - Open Braille Formatting Language</h1>
 
 <p>Working draft, revised 2020-04-29 (UTC+01:00)</p>
-<p>Published 2022-01-19T06:43+01:00</p>
+<p>Published 2022-02-11T13:24+01:00</p>
 <dl>
   <dt>This version:</dt>
     <dd><a href="https://mtmse.github.io/obfl/obfl-specification.html">https://mtmse.github.io/obfl/obfl-specification.html</a></dd>
@@ -40,9 +40,9 @@ format for representing text formatting layout. OBFL is an <a href="#ref-xml">XM
 <p>The following changes have been introduced that break compatibility with preceding versions
 (listed by date of change):</p>
 
-<p>20191202T11:00:00 (ins): <a href="#N69179">The table of contents is a hierarchy of toc-block
-elements with toc-entry elements as inline content.</a></p><p>20191202T11:00:00 (ins): <a href="#N69263">The toc-entry element has only inline content.</a></p><p>20200429T15:00:00 (ins): <a href="#N68566">The external-reference element can be attached to any position in the text
-  within the block to send information through the implementation from obfl to pef.</a></p><p>20200608T19:00:00 (ins): <a href="#N66530">Variable names are fixed.</a></p><p>20200608T19:00:00 (ins): <a href="#N69847">Variable names are fixed.</a></p>
+<p>20191202T11:00:00 (ins): <a href="#N69210">The table of contents is a hierarchy of toc-block
+elements with toc-entry elements as inline content.</a></p><p>20191202T11:00:00 (ins): <a href="#N69294">The toc-entry element has only inline content.</a></p><p>20200429T15:00:00 (ins): <a href="#N68587">The external-reference element can be attached to any position in the text
+  within the block to send information through the implementation from obfl to pef.</a></p><p>20200608T19:00:00 (ins): <a href="#N66537">Variable names are fixed.</a></p><p>20200608T19:00:00 (ins): <a href="#N69885">Variable names are fixed.</a></p>
 
 <div class="note">
 <p>After a period of one year from the time of the change, the change is no longer
@@ -59,7 +59,7 @@ seen as incompatible. In practice, this means that:</p>
 <h2 id="L77">Table of Contents</h2>
 
 <ul><li><a href="#L255">Introduction</a><ul><li><a href="#L261">What is OBFL?</a></li><li><a href="#L265">Why is OBFL Necessary?</a></li><li><a href="#L279">Scope Limitations</a></li></ul></li><li><a href="#L287">Definitions</a><ul><li><a href="#L295">Terminology</a></li><li><a href="#L302">General Terms</a></li><li><a href="#L425">Axes and Node Types</a></li><li><a href="#L449">Relationship to Other Specifications</a></li></ul></li><li><a href="#L453">Definition of OBFL</a><ul><li><a href="#L459">Document Conformance </a></li><li><a href="#L493">Using OBFL with Other
-Namespaces</a></li><li><a href="#L501">Internet Media Type and File Extension</a></li></ul></li><li><a href="#L502">White Space Processing</a><ul><li><a href="#L632">Problems with White Space</a></li><li><a href="#L657">Implications of Incorrect White Space</a></li><li><a href="#L671">Default White Space Processing</a></li></ul></li><li><a href="#L5021">Pagination</a><ul><li><a href="#L5022">Main Flow</a></li><li><a href="#L5025">Auxiliary Flows</a></li><li><a href="#L5023">Simplex</a></li><li><a href="#L5024">Duplex</a></li></ul></li><li><a href="#N66233">Page Model</a><ul><li><a href="#N66243">Recto (front side)</a></li><li><a href="#N66337">Verso (back side)</a></li></ul></li><li><a href="#L558">Elements</a><ul><li><a href="#L856">The Root Element</a><ul><li><a href="#L565">obfl</a></li></ul></li><li><a href="#L949">Document Metadata</a><ul><li><a href="#L587">meta</a></li></ul></li><li><a href="#L967">Page Templates</a><ul><li><a href="#L5871">layout-master</a></li><li><a href="#L608">template</a></li><li><a href="#L608-2">default-template</a></li><li><a href="#L647">page-area</a></li><li><a href="#L20904">fallback</a></li><li><a href="#L20925">rename</a></li><li><a href="#L629">before</a></li><li><a href="#L6291">after</a></li><li><a href="#L62911">header</a></li><li><a href="#L6471">footer</a></li><li><a href="#L1296">margin-region</a></li><li><a href="#L1328">indicators</a></li><li><a href="#L1329">marker-indicator</a><ul><li><a href="#L1365">Example</a></li></ul></li><li><a href="#L665">field</a></li><li><a href="#L683">marker-reference</a><ul><li><a href="#L1333">start-offset</a></li></ul></li><li><a href="#L690">compound-marker-reference</a><ul><li><a href="#L693">Example</a></li></ul></li><li><a href="#L696">string</a></li><li><a href="#L709">current-page</a></li></ul></li><li><a href="#L1631">Sequences</a><ul><li><a href="#L906">sequence</a></li><li><a href="#L11470">dynamic-sequence</a></li></ul></li><li><a href="#L1765">Blocks</a><ul><li><a href="#L1023">block</a></li></ul></li><li><a href="#L1894">Inline Content</a><ul><li><a href="#L722">evaluate</a><ul><li><a href="#L1033">Example</a></li></ul></li><li><a href="#L1207">leader</a></li><li><a href="#L1353">marker</a></li><li><a href="#L924">anchor</a></li><li><a href="#L1438">br</a></li><li><a href="#L836">page-number</a></li><li><a href="#L840">external-reference</a><ul><li><a href="#L1331">Example</a></li></ul></li><li><a href="#L849">span</a></li><li><a href="#L8491">style</a></li></ul></li><li><a href="#L2227">Tabular Data</a><ul><li><a href="#L2229">table</a><ul><li><a href="#table-margins">Borders in and Around Tables</a></li></ul></li><li><a href="#thead">thead</a></li><li><a href="#tbody">tbody</a></li><li><a href="#L2253">tr</a></li><li><a href="#L2277">td</a></li></ul></li><li><a href="#L2167">Table of Contents</a><ul><li><a href="#L735">table-of-contents</a></li><li><a href="#L735">toc-block</a></li><li><a href="#L1105">toc-entry</a></li><li><a href="#L1105">toc-entry-on-resumed</a></li><li><a href="#L9241">toc-sequence</a></li><li><a href="#L9514">on-toc-start</a></li><li><a href="#L969">on-volume-start</a></li><li><a href="#L987">on-volume-end</a></li><li><a href="#L1005">on-toc-end</a></li></ul></li><li><a href="#L2433">Volume Templates</a><ul><li><a href="#L84911">volume-template</a></li><li><a href="#L870">pre-content</a></li><li><a href="#L888">post-content</a></li><li><a href="#L8701">volume-transition</a><ul><li><a href="#L22731">Example</a></li></ul></li><li><a href="#L8702">block-interrupted</a></li><li><a href="#L8703">block-resumed</a></li><li><a href="#L8704">sequence-interrupted</a></li><li><a href="#L8705">sequence-resumed</a></li><li><a href="#N70207">any-interrupted</a></li><li><a href="#N70240">any-resumed</a></li></ul></li><li><a href="#L2529">Achored Data</a><ul><li><a href="#L1194">collection</a></li><li><a href="#L1210">item</a></li><li><a href="#L9242">list-of-references</a></li><li><a href="#L951">on-collection-start</a></li><li><a href="#L9511">on-page-start</a></li><li><a href="#L9512">on-page-end</a></li><li><a href="#L9513">on-collection-end</a></li></ul></li><li><a href="#L2715">Dynamic Source Data Processing</a><ul><li><a href="#L2248">xml-data</a><ul><li><a href="#L2273">Example</a></li></ul></li><li><a href="#L2724">renderer</a></li><li><a href="#L2749">rendering-scenario</a><ul><li><a href="#L2793">Example</a></li></ul></li><li><a href="#N70835">parameter</a></li><li><a href="#L2690">xml-processor</a><ul><li><a href="#L2720">Example</a></li></ul></li><li><a href="#L1607">xml-processor-result</a><ul><li><a href="#L2721">Example</a></li></ul></li><li><a href="#L432">file-reference</a><ul><li><a href="#L27214">Example</a></li></ul></li></ul></li></ul></li><li><a href="#L1608">Attribute Definitions</a><ul><li><a href="#L21839">hyphenate</a><ul><li><a href="#L21851">Example</a></li></ul></li><li><a href="#pagenumbercounter">page-number-counter</a></li><li><a href="#rowspacing">row-spacing</a></li><li><a href="#L2462">translate</a><ul><li><a href="#L2475">pre-translated</a></li></ul></li></ul></li><li><a href="#L16081">Attribute Groups</a><ul><li><a href="#block-atts">Block</a><ul><li><a href="#L2519">Collapsing Margins</a></li><li><a href="#L2536">Example</a></li></ul></li><li><a href="#borders">Borders</a></li><li><a href="#margin-atts">Margin</a></li><li><a href="#padding-atts">Padding</a></li></ul></li><li><a href="#L756">Rule Sets</a><ul><li><a href="#L763">Relax NG Rule Set</a></li><li><a href="#L774">Other Rule Sets</a></li></ul></li><li><a href="#L784">References</a><ul><li><a href="#L786">Normative References</a></li><li><a href="#L881">Informative References</a></li></ul></li></ul>
+Namespaces</a></li><li><a href="#L501">Internet Media Type and File Extension</a></li></ul></li><li><a href="#L502">White Space Processing</a><ul><li><a href="#L632">Problems with White Space</a></li><li><a href="#L657">Implications of Incorrect White Space</a></li><li><a href="#L671">Default White Space Processing</a></li></ul></li><li><a href="#L5021">Pagination</a><ul><li><a href="#L5022">Main Flow</a></li><li><a href="#L5025">Auxiliary Flows</a></li><li><a href="#L5023">Simplex</a></li><li><a href="#L5024">Duplex</a></li></ul></li><li><a href="#N66233">Page Model</a><ul><li><a href="#N66243">Recto (front side)</a></li><li><a href="#N66337">Verso (back side)</a></li></ul></li><li><a href="#L558">Elements</a><ul><li><a href="#L856">The Root Element</a><ul><li><a href="#L565">obfl</a></li></ul></li><li><a href="#L949">Document Metadata</a><ul><li><a href="#L587">meta</a></li></ul></li><li><a href="#L967">Page Templates</a><ul><li><a href="#L5871">layout-master</a></li><li><a href="#L608">template</a></li><li><a href="#L608-2">default-template</a></li><li><a href="#L647">page-area</a></li><li><a href="#L20904">fallback</a></li><li><a href="#L20925">rename</a></li><li><a href="#L629">before</a></li><li><a href="#L6291">after</a></li><li><a href="#L62911">header</a></li><li><a href="#L6471">footer</a></li><li><a href="#L1296">margin-region</a></li><li><a href="#L1328">indicators</a></li><li><a href="#L1329">marker-indicator</a><ul><li><a href="#L1365">Example</a></li></ul></li><li><a href="#L665">field</a></li><li><a href="#L683">marker-reference</a><ul><li><a href="#L1333">start-offset</a></li></ul></li><li><a href="#L690">compound-marker-reference</a><ul><li><a href="#L693">Example</a></li></ul></li><li><a href="#L696">string</a></li><li><a href="#L709">current-page</a></li></ul></li><li><a href="#L1631">Sequences</a><ul><li><a href="#L906">sequence</a></li><li><a href="#L11470">dynamic-sequence</a></li></ul></li><li><a href="#L1765">Blocks</a><ul><li><a href="#L1023">block</a></li></ul></li><li><a href="#L1894">Inline Content</a><ul><li><a href="#L722">evaluate</a><ul><li><a href="#L1033">Example</a></li></ul></li><li><a href="#L1207">leader</a></li><li><a href="#L1353">marker</a></li><li><a href="#L924">anchor</a></li><li><a href="#L1438">br</a></li><li><a href="#L836">page-number</a></li><li><a href="#L840">external-reference</a><ul><li><a href="#L1331">Example</a></li></ul></li><li><a href="#L849">span</a></li><li><a href="#L8491">style</a></li></ul></li><li><a href="#L2227">Tabular Data</a><ul><li><a href="#L2229">table</a><ul><li><a href="#table-margins">Borders in and Around Tables</a></li></ul></li><li><a href="#thead">thead</a></li><li><a href="#tbody">tbody</a></li><li><a href="#L2253">tr</a></li><li><a href="#L2277">td</a></li></ul></li><li><a href="#L2167">Table of Contents</a><ul><li><a href="#L735">table-of-contents</a></li><li><a href="#L735">toc-block</a></li><li><a href="#L1105">toc-entry</a></li><li><a href="#L1105">toc-entry-on-resumed</a></li><li><a href="#L9241">toc-sequence</a></li><li><a href="#L9514">on-toc-start</a></li><li><a href="#L969">on-volume-start</a></li><li><a href="#L987">on-volume-end</a></li><li><a href="#L1005">on-toc-end</a></li></ul></li><li><a href="#L2433">Volume Templates</a><ul><li><a href="#L84911">volume-template</a></li><li><a href="#L870">pre-content</a></li><li><a href="#L888">post-content</a></li><li><a href="#L8701">volume-transition</a><ul><li><a href="#L22731">Example</a></li></ul></li><li><a href="#L8702">block-interrupted</a></li><li><a href="#L8703">block-resumed</a></li><li><a href="#L8704">sequence-interrupted</a></li><li><a href="#L8705">sequence-resumed</a></li><li><a href="#N70245">any-interrupted</a></li><li><a href="#N70278">any-resumed</a></li></ul></li><li><a href="#L2529">Achored Data</a><ul><li><a href="#L1194">collection</a></li><li><a href="#L1210">item</a></li><li><a href="#L9242">list-of-references</a></li><li><a href="#L951">on-collection-start</a></li><li><a href="#L9511">on-page-start</a></li><li><a href="#L9512">on-page-end</a></li><li><a href="#L9513">on-collection-end</a></li></ul></li><li><a href="#L2715">Dynamic Source Data Processing</a><ul><li><a href="#L2248">xml-data</a><ul><li><a href="#L2273">Example</a></li></ul></li><li><a href="#L2724">renderer</a></li><li><a href="#L2749">rendering-scenario</a><ul><li><a href="#L2793">Example</a></li></ul></li><li><a href="#N70873">parameter</a></li><li><a href="#L2690">xml-processor</a><ul><li><a href="#L2720">Example</a></li></ul></li><li><a href="#L1607">xml-processor-result</a><ul><li><a href="#L2721">Example</a></li></ul></li><li><a href="#L432">file-reference</a><ul><li><a href="#L27214">Example</a></li></ul></li></ul></li></ul></li><li><a href="#L1608">Attribute Definitions</a><ul><li><a href="#L21839">hyphenate</a><ul><li><a href="#L21851">Example</a></li></ul></li><li><a href="#pagenumbercounter">page-number-counter</a></li><li><a href="#rowspacing">row-spacing</a></li><li><a href="#L2462">translate</a><ul><li><a href="#L2465">contracted</a></li><li><a href="#L2468">uncontracted</a></li><li><a href="#L2471">pre-translated</a></li><li><a href="#L2479">grade:&lt;number&gt;</a></li><li><a href="#L2483">6-dot</a></li><li><a href="#L2487">8-dot</a></li><li><a href="#L2491">Combinations</a></li></ul></li><li><a href="#L2500">xml:lang</a></li></ul></li><li><a href="#L16081">Attribute Groups</a><ul><li><a href="#block-atts">Block</a><ul><li><a href="#L2519">Collapsing Margins</a></li><li><a href="#L2536">Example</a></li></ul></li><li><a href="#borders">Borders</a></li><li><a href="#margin-atts">Margin</a></li><li><a href="#padding-atts">Padding</a></li></ul></li><li><a href="#L756">Rule Sets</a><ul><li><a href="#L763">Relax NG Rule Set</a></li><li><a href="#L774">Other Rule Sets</a></li></ul></li><li><a href="#L784">References</a><ul><li><a href="#L786">Normative References</a></li><li><a href="#L881">Informative References</a></li></ul></li></ul>
 
 <h2 id="L255">Introduction</h2>
 
@@ -444,6 +444,8 @@ the text body area so that the margin area can be used as well.</p>
         <dt>xml:lang [required]</dt>
           <dd>The document's primary language as defined in <a href="http://www.w3.org/TR/REC-xml/#sec-lang-tag">Section 2.12</a>
             of the XML 1.0 Recommendation [<a class="nref" href="#ref-xml">XML</a>].</dd>
+          <dd>See the <a href="#L2500">attribute description</a> for more
+            information.</dd>
         <dt>hyphenate [optional]</dt>
           <dd>Whether or not to hyphenate text descendants. </dd>
           <dd>One of 'true' or 'false'.</dd>
@@ -511,7 +513,7 @@ element is allowed, however a stricter set of elements might be more useful.</p>
 where the layout-master is applied. It contains page template information, such
 as the width and height of pages.</p>
 
-<ins id="N66530" datetime="20200608T19:00:00">Variable names are fixed.</ins>
+<ins id="N66537" datetime="20200608T19:00:00">Variable names are fixed.</ins>
 
 <div class="sidebar markup">
 <dl>
@@ -840,7 +842,7 @@ markers are present on the indicated row.</p>
             length of the translated <span class="no-markup">string</span> must
             not exceed the width of the margin-region.</dd>
         <dt>text-style [optional]</dt>
-          <dd class="">A text style, e.g. emphasis or strong</dd>
+          <dd class="">A text style</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -890,7 +892,7 @@ markers are present on the indicated row.</p>
   <dt>Attributes</dt>
     <dd><dl>
         <dt>text-style [optional]</dt>
-          <dd class="">A text style, e.g. emphasis or strong</dd>
+          <dd class="">A text style</dd>
         <dt>allow-text-flow [optional]</dt>
           <dd class="">Whether text from the page body is allowed to flow into
             this field when the effective contents of the field is empty space
@@ -929,7 +931,7 @@ element. If no reference is found, the empty string is returned.</p>
           <dd>Offset the search by the specified number of pages.</dd>
           <dd>Default is 0</dd>
         <dt>text-style [optional]</dt>
-          <dd class="">A text style, e.g. emphasis or strong</dd>
+          <dd class="">A text style</dd>
           <dd class="markup note">This attribute is only available in the
           context of a field element.</dd>
       </dl>
@@ -1020,7 +1022,7 @@ value attribute.</p>
         <dt>value [required]</dt>
           <dd class="no-markup">The string to output</dd>
         <dt>text-style [optional]</dt>
-          <dd class="">A text style, e.g. emphasis or strong</dd>
+          <dd class="">A text style</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -1043,7 +1045,7 @@ the current page, using the number format specified by this element.</p>
           <dd>One of 'default', 'roman', 'upper-roman', 'lower-roman',
             'upper-alpha', 'lower-alpha'.</dd>
         <dt>text-style [optional]</dt>
-          <dd class="">A text style, e.g. emphasis or strong</dd>
+          <dd class="">A text style</dd>
       </dl>
     </dd>
   <dt>Content Model</dt>
@@ -1074,6 +1076,8 @@ the current page, using the number format specified by this element.</p>
         <dt>xml:lang [optional]</dt>
           <dd>the sequence's primary language as defined in <a href="http://www.w3.org/TR/REC-xml/#sec-lang-tag">Section 2.12</a>
             of the XML 1.0 Recommendation [<a class="nref" href="#ref-xml">XML</a>].</dd>
+          <dd>See the <a href="#L2500">attribute description</a> for more
+            information.</dd>
         <dt>hyphenate [optional]</dt>
           <dd>Whether or not to hyphenate text descendants. </dd>
           <dd>One of 'true' or 'false'.</dd>
@@ -1124,6 +1128,8 @@ should be excluded entirely.</p>
         <dt>xml:lang [optional]</dt>
           <dd>The dynamic-sequence's primary language as defined in <a href="http://www.w3.org/TR/REC-xml/#sec-lang-tag">Section 2.12</a>
             of the XML 1.0 Recommendation [<a class="nref" href="#ref-xml">XML</a>].</dd>
+          <dd>See the <a href="#L2500">attribute description</a> for more
+            information.</dd>
         <dt>hyphenate [optional]</dt>
           <dd>Whether or not to hyphenate text descendants. </dd>
           <dd>One of 'true' or 'false'.</dd>
@@ -1293,7 +1299,7 @@ information.</p>
           <dd>A valid <a href="obfl-evaluation-language.html">OBFL Evaluation
             Language</a> expression.</dd>
         <dt>text-style [optional]</dt>
-          <dd>A text style, e.g. emphasis or strong</dd>
+          <dd>A text style</dd>
           <dd class="markup note">This attribute is only available in the context of a field element.</dd>
       </dl>
     </dd>
@@ -1473,7 +1479,7 @@ element.</p>
 
 <h4 id="L840" class="include">external-reference</h4>
 
-<ins id="N68566" datetime="20200429T15:00:00">The external-reference element can be attached to any position in the text
+<ins id="N68587" datetime="20200429T15:00:00">The external-reference element can be attached to any position in the text
   within the block to send information through the implementation from obfl to pef.</ins>
 
 <p>With the external-reference element custom annotations can be attached to any position in the text within
@@ -1534,6 +1540,8 @@ language is different from the surrounding text.</p>
         <dt>xml:lang [optional]</dt>
           <dd>A language as defined in <a href="http://www.w3.org/TR/REC-xml/#sec-lang-tag">Section 2.12</a>
             of the XML 1.0 Recommendation [<a class="nref" href="#ref-xml">XML</a>].</dd>
+          <dd>See the <a href="#L2500">attribute description</a> for more
+            information.</dd>
         <dt>hyphenate [optional]</dt>
           <dd>Whether or not to hyphenate text descendants. </dd>
           <dd>One of 'true' or 'false'.</dd>
@@ -1552,8 +1560,12 @@ language is different from the surrounding text.</p>
 
 <h4 id="L8491" class="include">style</h4>
 
-<p>The style element represents a segment of text with a specific style, e.g.
-emphasis or strong.</p>
+<p>The style element represents a segment of text with specific properties. An
+example of a text property is emphasis. An important precondition for a text
+property to be a style is that it could never apply to the whole document, only
+to a portion of it.</p>
+
+<p>Note that OBFL does not impose a certain vocabulary or syntax for styles.</p>
 
 <div class="sidebar markup">
 <dl>
@@ -1754,7 +1766,7 @@ table spans.</p>
 Note that this element specifies formatting of data in a table of contents, it
 does not by it self specify that a table of contents should be inserted.</p>
 
-<ins id="N69179" datetime="20191202T11:00:00">The table of contents is a hierarchy of toc-block
+<ins id="N69210" datetime="20191202T11:00:00">The table of contents is a hierarchy of toc-block
 elements with toc-entry elements as inline content.</ins>
 
 <div class="sidebar markup">
@@ -1797,7 +1809,7 @@ conditional container of content. In a volume-ranged toc-sequence, the content
 will only be rendered if the block the toc-entry refers to starts in the current
 volume. In a document-ranged toc-sequence, the content will always be rendered.</p>
 
-<ins id="N69263" datetime="20191202T11:00:00">The toc-entry element has only inline content.</ins>
+<ins id="N69294" datetime="20191202T11:00:00">The toc-entry element has only inline content.</ins>
 
 <div class="sidebar markup">
 <dl>
@@ -1892,6 +1904,8 @@ data.</p>
         <dt>xml:lang [optional]</dt>
           <dd>The toc-sequence's primary language as defined in <a href="http://www.w3.org/TR/REC-xml/#sec-lang-tag">Section 2.12</a>
             of the XML 1.0 Recommendation [<a class="nref" href="#ref-xml">XML</a>].</dd>
+          <dd>See the <a href="#L2500">attribute description</a> for more
+            information.</dd>
         <dt>hyphenate [optional]</dt>
           <dd>Whether or not to hyphenate text descendants. </dd>
           <dd>One of 'true' or 'false'.</dd>
@@ -2068,7 +2082,7 @@ sequences that can be used to create static contents such as information about
 the author and title of the book, there is a special sequence called
 toc-sequence.</p>
 
-<ins id="N69847" datetime="20200608T19:00:00">Variable names are fixed.</ins>
+<ins id="N69885" datetime="20200608T19:00:00">Variable names are fixed.</ins>
 
 <div class="sidebar markup">
 <dl>
@@ -2264,7 +2278,7 @@ volume's body of pages.</p>
     </dl>
   </div>
 
-  <h4 id="N70207" class="include">any-interrupted</h4>
+  <h4 id="N70245" class="include">any-interrupted</h4>
   <div class="note">
     <p>This feature is incubating (2018-09-24). This means that the feature is
       currently a work-in-progress and may change or disappear at any time.</p>
@@ -2281,7 +2295,7 @@ volume's body of pages.</p>
     </dl>
   </div>
 
-  <h4 id="N70240" class="include">any-resumed</h4>
+  <h4 id="N70278" class="include">any-resumed</h4>
   <div class="note">
     <p>This feature is incubating (2018-09-24). This means that the feature is
       currently a work-in-progress and may change or disappear at any time.</p>
@@ -2576,7 +2590,7 @@ applied to a given xml-data.</p>
 </pre>
 </div>
 
-<h4 id="N70835" class="include">parameter</h4>
+<h4 id="N70873" class="include">parameter</h4>
 
 <p>Defines a parameter for a rendering-scenario.</p>
 
@@ -2720,27 +2734,31 @@ reference content is an XSLT document. However additional content might be suppo
 <p>The overall hyphenation policy should be determined by the implementing
 application, for example per job or in a system setting. A user's preference
 should be respected, unless doing so would render the text difficult to read or
-interpret for some reason. The hyphenate attribute can be used when detailed
-control over hyphenation is required, e.g. to ensure proper rendering of
-content that may be difficult to interpret if hyphenated, such as
+interpret for some reason. The <code>hyphenate</code> attribute can be used
+when detailed control over hyphenation is required, e.g. to ensure proper
+rendering of content that may be difficult to interpret if hyphenated, such as
 hyperlinks.</p>
 
-<p>The hyphenation specified by <code>hyphenate</code> applies to all elements in
-its content unless overridden with another instance of <code>hyphenate</code>. In
-particular, the empty value of <code>hyphenate</code> is used on an element B to
-override a specification of <code>hyphenate</code> on an enclosing element A,
-without specifying another hyphenation policy. Within B, the user's
-preference for hyphenation should be applied.</p>
+<p>Note that the hyphenation policy in general does not affect the braille
+transcription itself, only how the braille is presented on the page, more
+specifically how it is "wrapped" across lines. An exception is when
+hyphenation is "non-standard".</p>
 
-<p>The value of the hyphenate attribute can either be 'true' or 'false'. The
-value 'true' indicates that a hyphenation algorithm should be applied to the
-text contents, i.e. add hyphenation information to the text. The value 'false'
-indicates that a hyphenation algorithm should <strong>NOT</strong> be applied
-to the text contents. However, obvious hyphention points that were already in
-the text to begin with <em>may</em> be used to hyphenate. Examples of
+<p>The hyphenation policy specified by <code>hyphenate</code> applies to all
+elements in its content unless overridden with another instance of <code>hyphenate</code>. In particular, the empty value of <code>hyphenate</code>
+is used on an element B to override a specification of <code>hyphenate</code>
+on an enclosing element A, without specifying another hyphenation policy.
+Within B, the user's preference for hyphenation should be applied.</p>
+
+<p>The value of the <code>hyphenate</code> attribute can either be 'true' or
+'false'. The value 'true' indicates that a hyphenation algorithm should be
+applied to the text contents, i.e. add hyphenation information to the text. The
+value 'false' indicates that a hyphenation algorithm should <strong>NOT</strong>
+be applied to the text contents. However, obvious hyphention points that were
+already in the text to begin with <em>may</em> be used to hyphenate. Examples of
 hyphenation points that may be used to hyphenate even when the value of the
-hyphenate attribute is 'false' include (but are not limited to): SOFT HYPHEN
-(U+00AD) and ZERO WIDTH SPACE (U+200B).</p>
+<code>hyphenate</code> attribute is 'false' include (but are not limited to):
+SOFT HYPHEN (U+00AD) and ZERO WIDTH SPACE (U+200B).</p>
 
 <h4 id="L21851">Example</h4>
 
@@ -2857,34 +2875,43 @@ render a spacing equal to four row heights.</p>
 
 <h3 id="L2462">translate</h3>
 
-<p>The overall translation policy should be determined by the user of the
-application, for example as a job parameter or a system setting. A user's
-preference should be respected whenever possible. Setting the translate
-attribute on the obfl-element is generally not recommended. The translate
-attribute should be used when detailed control over translation is
-<b>required</b>, e.g. when combining different languages or in books about
-braille code.</p>
+<p>The main braille code (the rules for transcribing text to braille) should be
+determined by the user of the application, for example as a job parameter or a
+system setting. A user's preference should be respected whenever possible.
+Setting the <code>translate</code> attribute on the <code>obfl</code> element
+is generally not recommended. The <code>translate</code> attribute should be
+used when detailed control over braille transcription is <b>required</b>, e.g.
+when combining different languages or in books about braille code.</p>
 
-<p>The value of the translate attribute can be 'pre-translated', 'grade0',
-'grade1', 'grade2' or 'grade3'.</p>
+<p>The braille code specified by <code>translate</code> applies to all elements
+in its content unless overridden with another instance of <code>translate</code>. In particular, the empty value of <code>translate</code> is
+used on an element B to override a specification of <code>translate</code> on an
+enclosing element A, without specifying another braille code. Within B, the
+user's preference for braille transcription should be applied.</p>
 
-<p>The translation specified by <code>translate</code> applies to all elements in
-its content unless overridden with another instance of <code>translate</code>. In
-particular, the empty value of <code>translate</code> is used on an element B to
-override a specification of <code>translate</code> on an enclosing element A,
-without specififying another translation. Within B, the user's preference for
-translation should be applied.</p>
+<p>The value of the <code>translate</code> attribute can be 'contracted',
+'uncontracted', 'pre-translated', 'grade:<em>&lt;number&gt;</em>', '6-dot',
+'8-dot', or certain combinations of these values.</p>
 
-<h4 id="L2475">pre-translated</h4>
+<h4 id="L2465">contracted</h4>
+
+<p>The value 'contracted' indicates that a braille code must be applied that
+uses contractions (if applicable).</p>
+
+<h4 id="L2468">uncontracted</h4>
+
+<p>The value 'uncontracted' indicates that a braille code must be applied that
+does not use contractions.</p>
+
+<h4 id="L2471">pre-translated</h4>
 
 <p>The value 'pre-translated' indicates that <i>the contents is already
-braille</i> and hence does not need processing by a complete braille translator
-to produce braille output. When using this value, text nodes MUST contain a
-combination of braille characters [U+2800-U+28FF] and the following:</p>
+braille</i> and hence does not need to be transcribed to produce braille output.
+When using this value, text nodes MUST contain a combination of braille
+characters [U+2800-U+28FF] and the following:</p>
 <dl>
-  <dt>SPACE (U+0020)</dt>
-    <dd>Regular space MUST be used at word boundaries for the purpose of line
-      breaking.</dd>
+  <dt>White space characters</dt>
+  <dd>All characters defined as white space by <a href="#ref-unicode">[Unicode]</a>.</dd>
   <dt>SOFT HYPHEN (U+00AD)</dt>
     <dd>Soft hyphen is used for dynamically inserting a hyphen at the end of a
       line. Regular hyphens can be represented by a braille pattern followed by
@@ -2896,14 +2923,71 @@ combination of braille characters [U+2800-U+28FF] and the following:</p>
 
 <p>Note that:</p>
 <ul>
-  <li>BRAILLE PATTERN BLANK (U+2800) is not whitespace nor line breaking. It
-    can be used in place of NO-BREAK SPACE (U+00A0). For other purposes, use
-    U+0020</li>
+  <li>BRAILLE PATTERN BLANK (U+2800) is not regarded as white space and should
+    be preserved. Proper white space characters must be used at word boundaries
+    in order to achieve correct line breaking.</li>
   <li>pre-translated text nodes are not influenced by the hyphenate attribute
     nor the global hyphenation policy</li>
   <li class="markup">style elements MUST NOT occur in pre-translated
   context</li>
 </ul>
+
+<h4 id="L2479">grade:<em>&lt;number&gt;</em></h4>
+
+<p>The value 'grade:<em>&lt;number&gt;</em>', where <em>&lt;number&gt;</em> is a
+non-negative integer or decimal number, indicates that a braille code must be
+applied with the specific contraction grade identified by the number. Note that
+how contraction grades are numbered is region dependent.</p>
+
+<h4 id="L2483">6-dot</h4>
+
+<p>The value '6-dot' indicates that a braille code must be used that does not
+make use of dots 7 and 8.</p>
+
+<h4 id="L2487">8-dot</h4>
+
+<p>The value '6-dot' indicates that a braille code must be used that does makes
+use of dots 7 and 8.</p>
+
+<h4 id="L2491">Combinations</h4>
+
+<p>Combinations of above values can be made by concatenating them, with a '/'
+character as delimiter. Not all combinations are valid however, and the parts
+must appear in a specific order. The combination must exist of one or more of
+the following, in the given order:</p>
+
+<ul>
+  <li>'contracted' or 'uncontracted'</li>
+  <li>grade:<em>&lt;number&gt;</em></li>
+  <li>'6-dot' or '8-dot'</li>
+</ul>
+
+<p>Some examples:</p>
+
+<ul>
+  <li>grade:1.5</li>
+  <li>uncontracted/6-dot</li>
+  <li>grade:2/8-dot</li>
+</ul>
+
+<h3 id="L2500">xml:lang</h3>
+
+<p>The <code>xml:lang</code> attribute is used to specify the language in which
+the content is written. It does <strong>NOT</strong> imply association with a
+particular braille code (this is the role of the <a href="#L2462"><code>translate</code></a> attribute). A braille code may however have special rules
+for transcribing text written in another language than its "principal"
+language.</p>
+
+<p>The language specified by <code>xml:lang</code> applies to all elements in
+its content unless overridden with another instance of <code>xml:lang</code>.
+In particular, the empty value of <code>xml:lang</code> is used on an element B
+to override a specification of <code>xml:lang</code> on an enclosing element A,
+without specifying another language. Within B, it is considered that there is
+no language information available, just as if <code>xml:lang</code> had not
+been specified on B or any of its ancestors.</p>
+
+<p>The values of the attribute are language identifiers as defined by
+[<a class="nref" href="#ref-bcp47">BCP 47</a>].</p>
 
 <h2 id="L16081">Attribute Groups</h2>
 
@@ -2990,6 +3074,8 @@ combination of braille characters [U+2800-U+28FF] and the following:</p>
   <dt>xml:lang [optional]</dt>
     <dd>the language of text descendants as defined in <a href="http://www.w3.org/TR/REC-xml/#sec-lang-tag">Section 2.12</a> of the
       XML 1.0 Recommendation [<a class="nref" href="#ref-xml">XML</a>].</dd>
+    <dd>See the <a href="#L2500">attribute description</a> for more
+      information.</dd>
   <dt>hyphenate [optional]</dt>
     <dd>Whether or not to hyphenate text descendants. </dd>
     <dd>One of 'true' or 'false'.</dd>
@@ -3251,6 +3337,11 @@ of this specification.</p>
     <dd>"<a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119: Key words for
       use in RFCs to Indicate Requirement Levels</a>", S. Bradner, March
     1997.</dd>
+  <dt><a id="ref-bcp47"><strong>[BCP 47]</strong></a></dt>
+    <dd>BCP 47, consisting of "<a href="https://tools.ietf.org/html/rfc4646">RFC
+    4646: Tags for Identifying Languages</a>", and
+    "<a href="https://tools.ietf.org/html/rfc4647">RFC 4647: Matching of Language
+    Tags</a>", A. Phillips, M. Davis. 2006.</dd>
   <dt><a id="ref-unicode"><strong>[Unicode]</strong></a></dt>
     <dd>"<a href="http://www.unicode.org/versions/Unicode5.1.0/">Unicode
       Standard, Version 5.1.0</a>", The Unicode Consortium. The Unicode

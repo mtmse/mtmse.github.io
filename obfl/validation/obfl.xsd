@@ -20,6 +20,59 @@
   <xs:attributeGroup name="row-spacing">
     <xs:attribute name="row-spacing"/>
   </xs:attributeGroup>
+  <xs:attributeGroup name="translate">
+    <xs:attribute name="translate">
+      <xs:simpleType>
+        <xs:union>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value=""/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="pre-translated"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="uncontracted"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="contracted"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="grade:[1-9]+(\.[0-9]+)?"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="6-dot"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="8-dot"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:pattern value="(contracted|uncontracted)(/grade:[1-9]+(\.[0-9]+)?)?(/([68]-dot))?"/>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:pattern value="grade:[1-9]+(\.[0-9]+)?(/([68]-dot))?"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <!-- hyphenate, true to hyphenate, false otherwise -->
   <xs:attributeGroup name="textAtts">
     <xs:attribute ref="xml:lang"/>
@@ -32,18 +85,7 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="translate">
-      <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:enumeration value=""/>
-          <xs:enumeration value="pre-translated"/>
-          <xs:enumeration value="grade0"/>
-          <xs:enumeration value="grade1"/>
-          <xs:enumeration value="grade2"/>
-          <xs:enumeration value="grade3"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
+    <xs:attributeGroup ref="obfl:translate"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="name-id">
     <xs:attribute name="name" use="required" type="xs:ID"/>
@@ -408,18 +450,7 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="translate">
-      <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:enumeration value=""/>
-          <xs:enumeration value="pre-translated"/>
-          <xs:enumeration value="grade0"/>
-          <xs:enumeration value="grade1"/>
-          <xs:enumeration value="grade2"/>
-          <xs:enumeration value="grade3"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
+    <xs:attributeGroup ref="obfl:translate"/>
   </xs:attributeGroup>
   <!---->
   <xs:element name="meta">
